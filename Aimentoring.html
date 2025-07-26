@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skilltrove Dashboard</title>
+  <style>
+    :root {
+      /* Color Palette */
+      --primary-blue: #2746a3;
+      --secondary-blue: #296dae;
+      --accent-cyan: #32f7a6;
+      --gradient-teal: #38dedd;
+      --soft-sky: #f6f9fd;
+      --white: #ffffff;
+      --card-shadow: #c5dbff31;
+      --card-border: #cae8ff;
+      --gold-star: #ffc034;
+      --soft-yellow: #fff081;
+      --orange-accent: #ff8d54;
+      --pink-accent: #ff3c6a;
+      --success-green: #32f7a6;
+      --text-main: #264072;
+      --header-navy: #23375b;
+      --footer-gradient: #284274;
+      --divider-blue: #25b8e4;
+      --heart-red: #ff4f65;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      display: flex;
+      height: 100vh;
+      background: var(--soft-sky);
+    }
+    .sidebar {
+      width: 240px;
+      background-color: var(--primary-blue);
+      color: var(--white);
+      padding: 30px 20px;
+    }
+    .sidebar h2 {
+      margin-bottom: 30px;
+      font-size: 22px;
+      text-align: center;
+      text-shadow: 0 0 5px var(--accent-cyan), 0 0 10px var(--accent-cyan);
+    }
+    .sidebar a {
+      display: block;
+      padding: 12px 10px;
+      color: var(--soft-yellow);
+      text-decoration: none;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover {
+      background-color: var(--secondary-blue);
+      box-shadow: 0 0 8px var(--accent-cyan);
+      color: var(--white);
+    }
+    .content {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+      background: var(--soft-sky);
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card {
+      perspective: 1000px;
+      background: var(--white);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px var(--card-shadow);
+      transition: transform 0.3s;
+      overflow: hidden;
+      opacity: 1;
+      animation: bounceIn 1s both;
+      position: relative;
+      transform: scale(1);
+    }
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      border-radius: 12px;
+    }
+    .card:hover .card-inner {
+      transform: rotateY(180deg);
+      box-shadow: 0 12px 24px var(--accent-cyan);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      backface-visibility: hidden;
+      padding: 20px;
+      background-color: var(--white);
+      color: var(--text-main);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    }
+    .card-back {
+      background-color: var(--soft-sky);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: rotateY(180deg);
+    }
+    .medal {
+      display: inline-block;
+      background-color: var(--gold-star);
+      padding: 4px 8px;
+      border-radius: 5px;
+      color: var(--header-navy);
+      font-weight: bold;
+      margin-top: 5px;
+      box-shadow: 0 0 10px var(--gold-star);
+      transition: 0.3s;
+    }
+    .medal:hover {
+      filter: brightness(120%);
+      transform: scale(1.2);
+    }
+    .section { display: none; }
+    .section.active { display: block; }
+    .progress-container { margin-top: 20px; }
+    .subject span { font-weight: bold; }
+    .bar {
+      background: var(--card-border);
+      border-radius: 10px;
+      height: 12px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background-color: var(--success-green);
+    }
+    /* Chat section */
+    .chat-section {
+      max-width: 800px;
+      margin: 40px auto;
+      background: var(--white);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 6px 18px var(--card-shadow);
+    }
+    .chat-box {
+      background: var(--soft-sky);
+      padding: 15px;
+      height: 220px;
+      overflow-y: auto;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      font-size: 15px;
+      color: var(--text-main);
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 12px 15px;
+      border-radius: 10px 0 0 10px;
+      border: 1px solid var(--card-border);
+      font-size: 15px;
+    }
+    .chat-input button {
+      background: var(--accent-cyan);
+      color: var(--header-navy);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 0 10px 10px 0;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .chat-input button:hover {
+      background: var(--gradient-teal);
+      box-shadow: 0 0 10px var(--accent-cyan), 0 0 20px var(--accent-cyan)55;
+    }
+    /* Notification styling */
+    .notification-list li {
+      background: var(--soft-yellow);
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px var(--gold-star);
+      color: var(--text-main);
+    }
+    /* Hamburger hidden in desktop */
+.hamburger {
+  display: none;
+  font-size: 30px;
+  color: var(--primary-blue);
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Mobile view styles */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -240px; /* hide sidebar */
+    top: 0;
+    height: 100%;
+    transition: 0.3s;
+    z-index: 999;
+  }
+  .sidebar.active {
+    left: 0; /* show sidebar when active */
+  }
+  .hamburger {
+    display: block; /* show dots on mobile */
+  }
+  .content {
+    padding-left: 0; /* remove sidebar space */
+  }
+}
+
+  </style>
+</head>
+<body>
+ <div class="sidebar">
+    <h2>📚 Skilltrove</h2>
+    <a href="#" onclick="showSection('progress')">👨‍🎓 Student Progress</a>
+    <a href="#" onclick="showSection('quiz')">📊 Quiz Review</a>
+    <a href="#" onclick="showSection('notifications')">🔔 Notifications</a>
+    <a href="#" onclick="showSection('ai')">🤖 AI Mentor</a>
+  </div>
+
+  <div class="content">
+  <div class="grid-container">
+    <!-- Repeat for 6 users -->
+    <div class="card" style="animation-delay:0.3s;">
+      <div class="card-inner">
+        <div class="card-front">
+          <h3>Sarayu</h3>
+          <p>Logic Building</p>
+          <p>🔥 Streak: 5 days</p>
+          <p>🪙 Coins: 120</p>
+          <span class="medal">🏅 2</span>
+        </div>
+        <div class="card-back">
+          <center><p>Focus: Critical Thinking</p></center>  
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <h3>Sriram</h3>
+          <p>Aptitude Learning</p>
+          <p>🔥 Streak: 3 days</p>
+          <p>🪙 Coins: 95</p>
+          <span class="medal">🏅 1</span>
+        </div>
+        <div class="card-back">
+         <center><p>Focus: Speed Math</p></center>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <h3>Eshani</h3>
+          <p>Verbal Skills</p>
+          <p>🔥 Streak: 7 days</p>
+          <p>🪙 Coins: 150</p>
+          <span class="medal">🏅 3</span>
+        </div>
+        <div class="card-back">
+          <center><p>Focus: Grammar & Comms</p></center>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <h3>Prashanth</h3>
+          <p>Reasoning</p>
+          <p>🔥 Streak: 2 days</p>
+          <p>🪙 Coins: 80</p>
+          <span class="medal">🏅 1</span>
+        </div>
+        <div class="card-back">
+         <center><p>Focus: Logic Puzzles</p></center>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <h3>Gupta</h3>
+          <p>Problem Solving</p>
+          <p>🔥 Streak: 4 days</p>
+          <p>🪙 Coins: 110</p>
+          <span class="medal">🏅 2</span>
+        </div>
+        <div class="card-back">
+          <center><p>Focus: Algorithms</p></center>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <h3>Vamsi</h3>
+          <p>MCQ Practice</p>
+          <p>🔥 Streak: 6 days</p>
+          <p>🪙 Coins: 130</p>
+          <span class="medal">🏅 2</span>
+        </div>
+        <div class="card-back">
+          <center><p>Focus: Mixed Sets</p></center>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- Quiz Review Section -->
+    <div id="quiz" class="section">
+      <h2>📊 Quiz Review - Subject Wise</h2>
+      <div class="progress-container">
+        <div><strong>🧔‍♂️ Vamsi</strong>
+          <div class="subject">🧮 Number System
+            <div class="bar"><div class="bar-fill" style="width: 60%"></div></div></div>
+          <div class="subject">🧠 Logical Reasoning
+            <div class="bar"><div class="bar-fill" style="width: 55%"></div></div></div>
+          <div class="subject">📖 Verbal Ability
+            <div class="bar"><div class="bar-fill" style="width: 80%"></div></div></div>
+        </div>
+        <br/>
+        <div><strong>👩 Sarayu</strong>
+          <div class="subject">🧮 Number System
+            <div class="bar"><div class="bar-fill" style="width: 85%"></div></div></div>
+          <div class="subject">🧠 Logical Reasoning
+            <div class="bar"><div class="bar-fill" style="width: 75%"></div></div></div>
+          <div class="subject">📖 Verbal Ability
+            <div class="bar"><div class="bar-fill" style="width: 65%"></div></div></div>
+        </div>
+        <br/>
+        <div><strong>🧔‍♂️ Gupta</strong>
+          <div class="subject">🧮 Number System
+            <div class="bar"><div class="bar-fill" style="width: 80%"></div></div></div>
+          <div class="subject">🧠 Logical Reasoning
+            <div class="bar"><div class="bar-fill" style="width: 70%"></div></div></div>
+        </div>
+         <div><strong>👩 Eshani</strong>
+          <div class="subject">🧮 Number System
+            <div class="bar"><div class="bar-fill" style="width: 85%"></div></div></div>
+          <div class="subject">🧠 Logical Reasoning
+            <div class="bar"><div class="bar-fill" style="width: 75%"></div></div></div>
+          <div class="subject">📖 Verbal Ability
+            <div class="bar"><div class="bar-fill" style="width: 65%"></div></div></div>
+        </div>
+        <br/>
+        <div><strong>🧔‍♂️ Prashanth</strong>
+          <div class="subject">🧮 Number System
+            <div class="bar"><div class="bar-fill" style="width: 80%"></div></div></div>
+          <div class="subject">🧠 Logical Reasoning
+            <div class="bar"><div class="bar-fill" style="width: 70%"></div></div></div>
+        </div>
+        <br/>
+        <div><strong>🧔‍♂️ Sriram</strong>
+          <div class="subject">🧮 Number System
+            <div class="bar"><div class="bar-fill" style="width: 60%"></div></div></div>
+          <div class="subject">🧠 Logical Reasoning
+            <div class="bar"><div class="bar-fill" style="width: 55%"></div></div></div>
+          <div class="subject">📖 Verbal Ability
+            <div class="bar"><div class="bar-fill" style="width: 80%"></div></div></div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- Notifications Section -->
+    <div id="notifications" class="section">
+      <h2>🔔 Notifications</h2>
+      <button onclick="setReminder()">Set Reminder</button>
+      <div id="popup">✅ Reminder Successfully Set!</div>
+    </div>
+    <div class="section" id="notify">
+      <ul class="notification-list">
+        <li>🎉 Congrats Eshani! You topped the leaderboard.</li>
+        <li>📢 Weekly quiz starts tomorrow. Be ready!</li>
+        <li>💡 New content added in Verbal Track.</li>
+        <li>🏅 Vamsi maintained a 6-day streak!</li>
+      </ul>
+    </div>
+
+    <!-- AI Mentor Section -->
+    <div id="ai" class="section">
+      <h2>🤖 AI Mentor</h2>
+      <div class="chatbox">
+        <div class="chat-msg">Hi! I'm your Apti-Arena Mentor 👋</div>
+        <div class="chat-msg typing" id="typing"></div>
+      </div>
+      <div class="chat-section">
+    <h2>💬 Ask AI Mentor</h2>
+    <div class="chat-box" id="chatBox">
+      <p><strong>AI:</strong> Hi! Ask me any doubt.</p>
+      </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Ask your doubts...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+    </div>
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+
+    function setReminder() {
+      const popup = document.getElementById("popup");
+      popup.style.display = "block";
+      setTimeout(() => popup.style.display = "none", 2000);
+    }
+
+    // Typing animation
+    const msg = "Ask me anything about quizzes, skills, or interview prep!";
+    let i = 0;
+    const typeBox = document.getElementById("typing");
+    function type() {
+      if (i < msg.length) {
+        typeBox.innerHTML += msg.charAt(i);
+        i++;
+        setTimeout(type, 50);
+      }
+    }
+    type();
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const chatBox = document.getElementById("chatBox");
+      const message = input.value.trim();
+
+      if (message !== "") {
+        chatBox.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+        setTimeout(() => {
+          chatBox.innerHTML += `<p><strong>AI:</strong> Good question! Let me assist you.</p>`;
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }, 600);
+        input.value = "";
+      }
+    }
+     // Apply staggered delay to each card
+  window.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+      card.style.animationDelay = `${index * 0.2}s`;
+    });
+  });
+  function toggleSidebar() {
+  document.querySelector('.sidebar').classList.toggle('active');
+}
+  </script>
+
+</body>
+</html>
