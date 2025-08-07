@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MasterControl AI</title>
+    
+    <!-- Links to Shared Styles and Icons -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Raleway:wght@700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Light Theme */
+            --bg-primary-light: #FFFFFF; 
+            --bg-secondary-light: rgba(245, 247, 250, 0.85);
+            --bg-tertiary-light: #f0f4f8;
+            --text-primary-light: #1c2a4e;
+            --text-secondary-light: #5a6a8a;
+            --border-light: rgba(0, 0, 0, 0.1);
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --accent-gradient-light: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            
+            /* Dark Theme */
+            --bg-primary-dark: #10141a;
+            --bg-secondary-dark: rgba(18, 24, 38, 0.8);
+            --bg-tertiary-dark: #1b212f;
+            --text-primary-dark: #e0e7ff;
+            --text-secondary-dark: #8a99b5;
+            --border-dark: rgba(255, 255, 255, 0.1);
+            --shadow-dark: rgba(0, 0, 0, 0.25);
+            --accent-gradient-dark: linear-gradient(135deg, #8e44ad 0%, #3498db 100%);
+        }
+
+        /* General Body Styles */
+        body {
+            font-family: 'Manrope', sans-serif;
+            margin: 0;
+            padding: 20px;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Raleway', sans-serif;
+        }
+        
+    a { color: inherit; text-decoration: none; }
+    a:focus, a:hover { outline: none; }
+    /* HEADER */
+    header {
+      width: 100vw;
+      background: var(--header-bg);
+      color: var(--header-nav-text);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 68px;
+      box-shadow: 0 2px 12px 0 rgba(67,97,238,0.04);
+      position: sticky;
+      top: 0; left: 0;
+      z-index: 1000;
+      user-select: none;
+      padding: 0;
+    }
+    .header-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 24px;
+    }
+    .logo-link {
+      display: flex;
+      align-items: center;
+      margin-right: 42px; /* ample space between logo and links, adjust as desired */
+    }
+    .logo-img {
+      height: 80px;
+      width: auto;
+      display: block;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      /* no margin needed on left, already spaced by .logo-link */
+    }
+    nav a {
+      font-weight: 600;
+      font-size: 1.06rem;
+      color: var(--primary);
+      transition: color 0.25s, background 0.25s;
+      padding: 6px 13px;
+      border-radius: 5px;
+      letter-spacing: 0.01em;
+    }
+    nav a:hover, nav a:focus {
+      color: var(--header-link-hover);
+      background: rgba(67,97,238,0.07);
+    }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      width: 32px;
+      height: 28px;
+      cursor: pointer;
+      gap: 6px;
+      background: none;
+      border: none;
+      margin-left: auto;
+    }
+    .menu-toggle span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .menu-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg);}
+    .menu-toggle.open span:nth-child(2) { opacity: 0;}
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg);}
+    @media (max-width: 900px) {
+      .header-inner { padding: 0 7vw; }
+      .logo-link { margin-right: 22px; }
+      nav { gap: 1.1rem; }
+    }
+    @media (max-width: 768px) {
+      .header-inner { padding: 0 12px; }
+      .logo-link { margin-right: 12px; }
+      nav {
+        position: fixed;
+        top: 68px; left: 0; right: 0;
+        background: var(--header-bg);
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100vw;
+        max-width: 100vw;
+        padding: 12px 22px 32px 18px;
+        border-bottom: 1px solid #e9ecef;
+        box-shadow: 0 4px 18px rgba(67,97,238,0.04);
+        transform: translateY(-120%);
+        transition: transform 0.3s;
+        z-index: 998;
+      }
+      nav.open { transform: translateY(0); }
+      nav a {
+        padding: 10px 3px;
+        width: 100%;
+        font-size: 1.09rem;
+        margin-left: 4px;
+      }
+      .menu-toggle { display: flex; }
+    }
+
+
+        /* Light Mode Styles */
+        body:not(.dark-mode) {
+            --bg-primary: var(--bg-primary-light);
+            --bg-secondary: var(--bg-secondary-light);
+            --bg-tertiary: var(--bg-tertiary-light);
+            --text-primary: var(--text-primary-light);
+            --text-secondary: var(--text-secondary-light);
+            --border-color: var(--border-light);
+            --shadow-color: var(--shadow-light);
+            --accent-gradient: var(--accent-gradient-light);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            --bg-primary: var(--bg-primary-dark);
+            --bg-secondary: var(--bg-secondary-dark);
+            --bg-tertiary: var(--bg-tertiary-dark);
+            --text-primary: var(--text-primary-dark);
+            --text-secondary: var(--text-secondary-dark);
+            --border-color: var(--border-dark);
+            --shadow-color: var(--shadow-dark);
+            --accent-gradient: var(--accent-gradient-dark);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .chat-container {
+            max-width: 800px;
+            height: calc(100vh - 160px); /* Adjusted for header */
+            margin: 20px auto;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 var(--shadow-color);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .chat-header h1 {
+            margin-right: 200px;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chat-header h1 i {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #chat-box {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 12px 18px;
+            border-radius: 20px;
+            line-height: 1.5;
+            font-size: 0.95em;
+            overflow-wrap: break-word;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .user-message {
+            background: var(--accent-gradient);
+            color: #fff;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .ai-message {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            align-self: flex-start;
+            border: 1px solid var(--border-color);
+            border-bottom-left-radius: 5px;
+        }
+        
+        .ai-error-message { 
+            background-color: #ffcdd2; 
+            color: #c62828; 
+            align-self: flex-start; 
+        }
+
+        .loading-message {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            align-self: flex-start;
+        }
+        .loader {
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--text-secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #suggestion-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 20px;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .suggestion {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.2s ease;
+        }
+
+        .suggestion:hover {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--text-secondary);
+        }
+
+        #input-area {
+            display: flex;
+            padding: 15px;
+            background-color: transparent;
+            border-top: 1px solid var(--border-color);
+            flex-shrink: 0;
+            gap: 10px;
+        }
+
+        #user-input {
+            flex-grow: 1;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 25px;
+            padding: 12px 20px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        #user-input:focus {
+            outline: none;
+            border-color: var(--text-secondary);
+        }
+
+        #send-button {
+            background: var(--accent-gradient);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+        #send-button:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+  <header role="banner">
+    <div class="header-inner">
+      <a href="#trovegate" class="logo-link" aria-label="SkillTrove Home">
+        <img src="logo.jpg"
+             alt="SkillTrove Logo"
+             class="logo-img"
+             height="48"
+        />
+      </a>
+      <nav aria-label="Primary navigation" id="primary-nav">
+        <a href="new.html">TroveGate</a>
+        <a href="aboutpage.html">About Us</a>
+        <a href="index.html">Skill Quest</a>
+        <a href="aimodel.html">AI Assistance</a>
+        <a href="lastFile1.html">MyVault</a>
+        <a href="community.html">Community</a>
+      </nav>
+      <button
+        aria-expanded="false"
+        aria-controls="primary-nav"
+        aria-label="Toggle menu"
+        class="menu-toggle"
+        id="menu-toggle"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+    <!-- Placeholder for the main navigation header -->
+    <!-- <header id="main-header"></header> -->
+
+    <!-- Placeholder for the floating theme toggle -->
+    <div id="floating-widgets-container"></div>
+
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1><i class="fas fa-brain"></i> MasterControl AI</h1>
+            <!-- The theme toggle is now loaded globally by scripts.js -->
+        </header>
+        <div id="chat-box">
+        </div>
+        <div id="suggestion-buttons">
+            <button class="suggestion">What are my account stats?</button>
+            <button class="suggestion">How many users are on the website?</button>
+            <button class="suggestion">What is your name?</button>
+        </div>
+        <div id="input-area">
+            <input type="text" id="user-input" placeholder="Ask a question...">
+            <button id="send-button" aria-label="Send Message"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- This page's specific script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatBox = document.getElementById('chat-box');
+            const userInput = document.getElementById('user-input');
+            const sendButton = document.getElementById('send-button');
+            const suggestionButtons = document.querySelectorAll('.suggestion');
+
+            const MOCK_USER_ID = 'user_123';
+            const mockDatabase = {
+                users: { 'user_123': { name: 'Alex', joinDate: '2024-05-15', coins: 1250, level: 15 } },
+                website: { totalUsers: 5432, dailyActiveUsers: 1234, platformVersion: 'v2.5.1' }
+            };
+
+            const API_KEY = "AIzaSyBS7z4U-SqHdpmWwkgZdD191b2EunpWYBc"; 
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
+            const tools = [{
+                functionDeclarations: [
+                    { name: "get_coin_statistics", description: "Get the coin balance and level for the current user.", parameters: { type: "OBJECT", properties: {} } },
+                    { name: "get_account_info", description: "Get the account name and join date for the current user.", parameters: { type: "OBJECT", properties: {} } },
+                    { name: "get_website_stats", description: "Get general website statistics.", parameters: { type: "OBJECT", properties: {} } }
+                ]
+            }];
+
+            const availableFunctions = {
+                get_coin_statistics: () => mockDatabase.users[MOCK_USER_ID],
+                get_account_info: () => mockDatabase.users[MOCK_USER_ID],
+                get_website_stats: () => mockDatabase.website,
+            };
+
+            const systemPrompt = `You are MasterControl AI, a helpful assistant...`; // Abridged for brevity
+            
+            let chatHistory = [
+                { role: "user", parts: [{ text: systemPrompt }] },
+                { role: "model", parts: [{ text: "Understood! I'm ready to help." }] }
+            ];
+
+            sendButton.addEventListener('click', handleSendMessage);
+            userInput.addEventListener('keydown', (e) => { 
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSendMessage();
+                }
+            });
+            suggestionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    userInput.value = button.textContent;
+                    handleSendMessage();
+                });
+            });
+
+            async function handleSendMessage() {
+                const message = userInput.value.trim();
+                if (!message) return;
+
+                addMessage(message, 'user');
+                userInput.value = '';
+                addMessage('', 'loading');
+
+                chatHistory.push({ role: "user", parts: [{ text: message }] });
+
+                const response = await callGeminiAPI(chatHistory, tools);
+                const functionCall = response?.candidates?.[0]?.content?.parts?.[0]?.functionCall;
+
+                if (functionCall) {
+                    const { name } = functionCall;
+                    if (availableFunctions[name]) {
+                        const functionResult = availableFunctions[name]();
+                        chatHistory.push({ role: "model", parts: [{ functionCall }] });
+                        chatHistory.push({ role: "function", parts: [{ functionResponse: { name, response: functionResult } }] });
+                        const finalResponse = await callGeminiAPI(chatHistory, tools);
+                        processFinalResponse(finalResponse);
+                    } else { 
+                        addMessage(`Error: Function "${name}" not found.`, 'ai-error'); 
+                    }
+                } else {
+                    processFinalResponse(response);
+                }
+            }
+            
+            function processFinalResponse(response) {
+                removeLoadingMessage();
+                const lastMessage = response?.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (lastMessage) {
+                    addMessage(lastMessage, 'ai');
+                    chatHistory.push({ role: "model", parts: [{ text: lastMessage }] });
+                } else {
+                    addMessage("Sorry, I couldn't get a response. Please check your API Key.", 'ai-error');
+                    console.error("API Error or Empty Response:", response);
+                }
+            }
+
+            async function callGeminiAPI(history, activeTools) {
+                if (!API_KEY || API_KEY.includes("YOUR_GEMINI_API_KEY")) {
+                    removeLoadingMessage();
+                    addMessage("API Key is missing. Please add it to the script section.", 'ai-error');
+                    return null;
+                }
+                const requestBody = { contents: history, tools: activeTools };
+
+                try {
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(requestBody),
+                    });
+                    if (!response.ok) {
+                        const errorBody = await response.json();
+                        throw new Error(`API Error: ${response.status} - ${errorBody.error.message}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    removeLoadingMessage();
+                    addMessage(`Error: ${error.message}.`, 'ai-error');
+                    console.error("Fetch Error:", error);
+                    return null;
+                }
+            }
+
+            const addMessage = (text, sender) => {
+                if (sender === 'loading') {
+                    const messageElement = document.createElement('div');
+                    messageElement.classList.add('message', 'loading-message');
+                    messageElement.innerHTML = '<div class="loader"></div>';
+                    chatBox.appendChild(messageElement);
+                } else {
+                    const messageElement = document.createElement('div');
+                    messageElement.classList.add('message', `${sender}-message`);
+                    let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*/g, '• ').replace(/\n/g, '<br>');
+                    messageElement.innerHTML = formattedText;
+                    chatBox.appendChild(messageElement);
+                }
+                chatBox.scrollTop = chatBox.scrollHeight;
+            };
+
+            const removeLoadingMessage = () => {
+                const loadingElement = chatBox.querySelector('.loading-message');
+                if (loadingElement) loadingElement.remove();
+            };
+
+            addMessage('Hello! I am MasterControl AI. How can I assist you today?', 'ai');
+        });
+    </script>
+    
+    <!-- Link to the shared script file that loads the header and theme toggle -->
+    <script src="scripts.js"></script>
+</body>
+</html>
