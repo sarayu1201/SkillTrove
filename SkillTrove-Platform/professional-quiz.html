@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Assessment Arena - SkillTrove</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2746a3;
+            --secondary-blue: #296dae;
+            --accent-cyan: #32f7a6;
+            --professional-gold: #d4af37;
+            --professional-dark: #1a1a2e;
+            --white: #ffffff;
+            --text-main: #264072;
+            --neon-gold: #ffd700;
+            --neon-blue: #0080ff;
+            --neon-purple: #8000ff;
+            --neon-silver: #c0c0c0;
+            --dark-bg: #0a0a0a;
+            --game-dark: #1a1a2e;
+            --executive-platinum: #e5e4e2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--professional-dark) 30%, var(--primary-blue) 70%, var(--professional-gold) 100%);
+            min-height: 100vh;
+            font-family: 'Manrope', sans-serif;
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .professional-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(212, 175, 55, 0.1);
+            animation: professional-float 8s linear infinite;
+        }
+
+        @keyframes professional-float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        .professional-header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--professional-gold);
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo-professional {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--professional-gold);
+            text-shadow: 0 0 25px var(--professional-gold);
+            animation: gold-pulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes gold-pulse {
+            from { text-shadow: 0 0 25px var(--professional-gold); }
+            to { text-shadow: 0 0 35px var(--professional-gold), 0 0 45px #f4d03f; }
+        }
+
+        .professional-stats {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .stat-item {
+            text-align: center;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--professional-gold);
+            text-shadow: 0 0 15px var(--professional-gold);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--executive-platinum);
+            font-weight: 500;
+        }
+
+        /* Main Assessment Container */
+        .assessment-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .assessment-arena {
+            background: rgba(26, 26, 46, 0.95);
+            border-radius: 30px;
+            padding: 3rem;
+            border: 3px solid var(--professional-gold);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .assessment-arena::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            animation: executive-scan 4s linear infinite;
+        }
+
+        @keyframes executive-scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .assessment-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .assessment-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--professional-gold), var(--executive-platinum), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: professional-shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes professional-shimmer {
+            0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+            50% { filter: hue-rotate(30deg) brightness(1.2); }
+        }
+
+        .assessment-subtitle {
+            color: var(--executive-platinum);
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .difficulty-badge {
+            background: linear-gradient(135deg, var(--professional-gold), #f4d03f);
+            color: var(--professional-dark);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-block;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 30px;
+            padding: 0.8rem;
+            margin-bottom: 3rem;
+            border: 2px solid var(--professional-gold);
+        }
+
+        .progress-bar {
+            background: rgba(26, 26, 46, 0.9);
+            border-radius: 25px;
+            height: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--professional-gold), var(--executive-platinum));
+            border-radius: 25px;
+            transition: width 0.8s ease;
+            box-shadow: 0 0 25px var(--professional-gold);
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--white);
+            text-shadow: 0 0 10px var(--dark-bg);
+        }
+
+        /* Question Card */
+        .question-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 40px rgba(0, 128, 255, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .question-number {
+            font-family: 'Orbitron', monospace;
+            color: var(--professional-gold);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .question-category {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--professional-gold);
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        /* Answer Options */
+        .answers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .answer-option {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid var(--neon-blue);
+            border-radius: 20px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .answer-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .answer-option:hover::before {
+            left: 100%;
+        }
+
+        .answer-option:hover {
+            border-color: var(--professional-gold);
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .answer-option.selected {
+            border-color: var(--professional-gold);
+            background: rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+        }
+
+        .answer-option.correct {
+            border-color: var(--accent-cyan);
+            background: rgba(50, 247, 166, 0.3);
+            animation: professional-correct 1.2s ease-in-out;
+        }
+
+        .answer-option.incorrect {
+            border-color: #ff4757;
+            background: rgba(255, 71, 87, 0.3);
+            animation: professional-incorrect 0.6s ease-in-out;
+        }
+
+        @keyframes professional-correct {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        @keyframes professional-incorrect {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-15px); }
+            75% { transform: translateX(15px); }
+        }
+
+        .answer-letter {
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            color: var(--professional-gold);
+            margin-right: 1.5rem;
+            font-size: 1.4rem;
+            text-shadow: 0 0 10px var(--professional-gold);
+        }
+
+        .answer-text {
+            font-weight: 500;
+            color: var(--white);
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        /* Control Buttons */
+        .assessment-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-professional {
+            background: linear-gradient(135deg, var(--professional-dark), var(--professional-gold));
+            color: var(--white);
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 20px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1rem;
+        }
+
+        .btn-professional:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(26, 26, 46, 0.6);
+        }
+
+        .btn-professional:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .timer-professional {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--professional-gold);
+            text-shadow: 0 0 25px var(--professional-gold);
+            animation: timer-professional-pulse 1.5s ease-in-out infinite;
+            background: rgba(26, 26, 46, 0.8);
+            padding: 1rem 2rem;
+            border-radius: 20px;
+            border: 2px solid var(--professional-gold);
+        }
+
+        @keyframes timer-professional-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        /* Score Display */
+        .professional-score {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(26, 26, 46, 0.95);
+            border: 3px solid var(--professional-gold);
+            border-radius: 20px;
+            padding: 1.5rem;
+            z-index: 200;
+            backdrop-filter: blur(25px);
+            text-align: center;
+        }
+
+        .score-value {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--professional-gold);
+            text-shadow: 0 0 20px var(--professional-gold);
+        }
+
+        .score-label {
+            color: var(--executive-platinum);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .expertise-level {
+            background: linear-gradient(135deg, var(--professional-gold), #f4d03f);
+            color: var(--professional-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-top: 1rem;
+        }
+
+        /* Assessment Complete Screen */
+        .assessment-complete {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .assessment-complete-content {
+            background: rgba(26, 26, 46, 0.98);
+            border: 4px solid var(--professional-gold);
+            border-radius: 30px;
+            padding: 4rem;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 0 80px var(--professional-gold);
+            backdrop-filter: blur(30px);
+        }
+
+        .final-score {
+            font-family: 'Orbitron', monospace;
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--professional-gold);
+            text-shadow: 0 0 40px var(--professional-gold);
+            margin: 2rem 0;
+        }
+
+        .performance-grade {
+            font-size: 2rem;
+            color: var(--accent-cyan);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: 2px solid var(--professional-gold);
+            padding: 1.2rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 200;
+            backdrop-filter: blur(15px);
+        }
+
+        .back-btn:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateX(-8px);
+            box-shadow: 0 0 25px var(--professional-gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .assessment-container {
+                padding: 0 1rem;
+            }
+            
+            .assessment-arena {
+                padding: 2rem;
+            }
+            
+            .answers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .assessment-controls {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .professional-stats {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="professional-bg" id="professionalBg"></div>
+
+    <button class="back-btn" onclick="window.location.href='professional-dashboard.html'">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <div class="professional-score">
+        <div class="score-value" id="scoreValue">0</div>
+        <div class="score-label">ASSESSMENT SCORE</div>
+        <div class="expertise-level" id="expertiseLevel">BEGINNER</div>
+    </div>
+
+    <header class="professional-header">
+        <div class="logo-professional">
+            <i class="fas fa-crown"></i> PROFESSIONAL ASSESSMENT
+        </div>
+        <div class="professional-stats">
+            <div class="stat-item">
+                <div class="stat-value" id="expertise">EXPERT</div>
+                <div class="stat-label">TARGET LEVEL</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="accuracy">0%</div>
+                <div class="stat-label">ACCURACY</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="ranking">--</div>
+                <div class="stat-label">INDUSTRY RANK</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="assessment-container">
+        <div class="assessment-arena">
+            <div class="assessment-header">
+                <h1 class="assessment-title">EXECUTIVE CHALLENGE</h1>
+                <p class="assessment-subtitle">Advanced Professional Competency Assessment</p>
+                <div class="difficulty-badge">PROFESSIONAL LEVEL</div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    <div class="progress-text" id="progressText">Assessment 1 of 8</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number" id="questionNumber">
+                    SCENARIO 01
+                    <span class="question-category" id="questionCategory">LEADERSHIP</span>
+                </div>
+                <div class="question-text" id="questionText">
+                    You're leading a cross-functional team on a critical project with a tight deadline. Two key team members have conflicting approaches to solving a technical challenge. How do you handle this situation to ensure project success while maintaining team cohesion?
+                </div>
+                
+                <div class="answers-grid" id="answersGrid">
+                    <div class="answer-option" onclick="selectAnswer(this, false)">
+                        <span class="answer-letter">A</span>
+                        <span class="answer-text">Choose the approach from the more senior team member to avoid conflict</span>
+                    </div>
+                    <div class="answer-option" onclick="selectAnswer(this, true)">
+                        <span class="answer-letter">B</span>
+                        <span class="answer-text">Facilitate a collaborative discussion to evaluate both approaches and reach a consensus</span>
+                    </div>
+                    <div class="answer-option" onclick="selectAnswer(this, false)">
+                        <span class="answer-letter">C</span>
+                        <span class="answer-text">Make the decision yourself based on your technical expertise</span>
+                    </div>
+                    <div class="answer-option" onclick="selectAnswer(this, false)">
+                        <span class="answer-letter">D</span>
+                        <span class="answer-text">Assign each team member to work on their preferred approach separately</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assessment-controls">
+                <div class="timer-professional" id="timer">90</div>
+                <button class="btn-professional" id="nextBtn" onclick="nextQuestion()" disabled>
+                    <i class="fas fa-arrow-right"></i> NEXT SCENARIO
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assessment Complete Modal -->
+    <div class="assessment-complete" id="assessmentComplete">
+        <div class="assessment-complete-content">
+            <h2 style="color: var(--professional-gold); font-family: 'Orbitron', monospace; font-size: 2.5rem; margin-bottom: 1rem;">
+                ASSESSMENT COMPLETE
+            </h2>
+            <div class="final-score" id="finalScore">0</div>
+            <div class="performance-grade" id="performanceGrade">EXPERT LEVEL</div>
+            <p style="color: var(--executive-platinum); margin-bottom: 3rem; font-size: 1.1rem;">
+                Outstanding professional competency demonstrated!
+            </p>
+            <button class="btn-professional" onclick="restartAssessment()">
+                <i class="fas fa-redo"></i> RETAKE ASSESSMENT
+            </button>
+            <button class="btn-professional" onclick="window.location.href='professional-dashboard.html'" style="margin-left: 1rem;">
+                <i class="fas fa-chart-line"></i> VIEW ANALYTICS
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        let score = 0;
+        let correctAnswers = 0;
+        let timeLeft = 90;
+        let timerInterval;
+        let selectedAnswer = null;
+
+        const professionalQuestions = [
+            {
+                category: "LEADERSHIP",
+                question: "You're leading a cross-functional team on a critical project with a tight deadline. Two key team members have conflicting approaches to solving a technical challenge. How do you handle this situation?",
+                options: [
+                    "Choose the approach from the more senior team member to avoid conflict",
+                    "Facilitate a collaborative discussion to evaluate both approaches and reach a consensus",
+                    "Make the decision yourself based on your technical expertise",
+                    "Assign each team member to work on their preferred approach separately"
+                ],
+                correct: 1
+            },
+            {
+                category: "STRATEGY",
+                question: "Your company is considering entering a new market. What's the most critical factor to evaluate first?",
+                options: [
+                    "Competitor pricing strategies",
+                    "Market size and growth potential",
+                    "Internal resource allocation",
+                    "Regulatory compliance requirements"
+                ],
+                correct: 1
+            },
+            {
+                category: "INNOVATION",
+                question: "How would you foster innovation in a traditional, risk-averse organization?",
+                options: [
+                    "Implement radical changes immediately",
+                    "Create small pilot programs to demonstrate value",
+                    "Wait for leadership to initiate changes",
+                    "Focus only on proven technologies"
+                ],
+                correct: 1
+            },
+            {
+                category: "COMMUNICATION",
+                question: "When presenting a complex technical solution to non-technical stakeholders, what's the best approach?",
+                options: [
+                    "Use detailed technical specifications",
+                    "Focus on business impact and benefits",
+                    "Delegate the presentation to technical team members",
+                    "Provide comprehensive documentation"
+                ],
+                correct: 1
+            },
+            {
+                category: "PROBLEM SOLVING",
+                question: "A critical system failure occurs during peak business hours. What's your immediate priority?",
+                options: [
+                    "Identify who is responsible for the failure",
+                    "Implement a quick temporary fix",
+                    "Assess impact and activate incident response protocol",
+                    "Schedule a post-mortem meeting"
+                ],
+                correct: 2
+            }
+        ];
+
+        function initializeAssessment() {
+            createProfessionalEffects();
+            startTimer();
+            loadQuestion();
+        }
+
+        function createProfessionalEffects() {
+            const bg = document.getElementById('professionalBg');
+            
+            // Create floating professional icons
+            const icons = ['fas fa-briefcase', 'fas fa-chart-line', 'fas fa-cogs', 'fas fa-users', 'fas fa-lightbulb', 'fas fa-target'];
+            
+            for (let i = 0; i < 30; i++) {
+                const icon = document.createElement('i');
+                icon.className = `floating-icon ${icons[Math.floor(Math.random() * icons.length)]}`;
+                icon.style.left = Math.random() * 100 + 'vw';
+                icon.style.animationDelay = Math.random() * 8 + 's';
+                icon.style.animationDuration = (6 + Math.random() * 4) + 's';
+                bg.appendChild(icon);
+            }
+        }
+
+        function startTimer() {
+            timeLeft = 90; // 90 seconds for professional questions
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').textContent = timeLeft;
+                
+                if (timeLeft <= 30) {
+                    document.getElementById('timer').style.color = '#ff4757';
+                    document.getElementById('timer').style.animation = 'timer-urgent 0.5s ease-in-out infinite';
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    nextQuestion();
+                }
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            if (currentQuestion > professionalQuestions.length) {
+                endAssessment();
+                return;
+            }
+
+            const question = professionalQuestions[currentQuestion - 1];
+            document.getElementById('questionNumber').innerHTML = `
+                SCENARIO ${currentQuestion.toString().padStart(2, '0')}
+                <span class="question-category">${question.category}</span>
+            `;
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('progressText').textContent = `Assessment ${currentQuestion} of ${professionalQuestions.length}`;
+            document.getElementById('progressFill').style.width = `${(currentQuestion - 1) / professionalQuestions.length * 100}%`;
+
+            const answersGrid = document.getElementById('answersGrid');
+            answersGrid.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const answerDiv = document.createElement('div');
+                answerDiv.className = 'answer-option';
+                answerDiv.onclick = () => selectAnswer(answerDiv, index === question.correct);
+                answerDiv.innerHTML = `
+                    <span class="answer-letter">${String.fromCharCode(65 + index)}</span>
+                    <span class="answer-text">${option}</span>
+                `;
+                answersGrid.appendChild(answerDiv);
+            });
+
+            selectedAnswer = null;
+            document.getElementById('nextBtn').disabled = true;
+        }
+
+        function selectAnswer(element, isCorrect) {
+            if (selectedAnswer) return;
+
+            selectedAnswer = element;
+            clearInterval(timerInterval);
+
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+
+            if (isCorrect) {
+                element.classList.add('correct');
+                score += 200 + (timeLeft * 3); // Higher scoring for professionals
+                correctAnswers++;
+                updateScore();
+                playProfessionalFeedback('correct');
+            } else {
+                element.classList.add('incorrect');
+                playProfessionalFeedback('incorrect');
+                
+                // Show correct answer
+                document.querySelectorAll('.answer-option').forEach((option, index) => {
+                    if (professionalQuestions[currentQuestion - 1].correct === index) {
+                        option.classList.add('correct');
+                    }
+                });
+            }
+
+            document.getElementById('nextBtn').disabled = false;
+            updateAccuracy();
+            
+            setTimeout(() => {
+                if (currentQuestion < professionalQuestions.length) {
+                    document.getElementById('nextBtn').innerHTML = '<i class="fas fa-arrow-right"></i> NEXT SCENARIO';
+                } else {
+                    document.getElementById('nextBtn').innerHTML = '<i class="fas fa-flag-checkered"></i> COMPLETE ASSESSMENT';
+                }
+            }, 1500);
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            
+            if (currentQuestion > professionalQuestions.length) {
+                endAssessment();
+                return;
+            }
+
+            // Reset for next question
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.style.pointerEvents = 'auto';
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+
+            loadQuestion();
+            startTimer();
+            document.getElementById('timer').style.color = 'var(--professional-gold)';
+            document.getElementById('timer').style.animation = 'timer-professional-pulse 1.5s ease-in-out infinite';
+        }
+
+        function updateScore() {
+            document.getElementById('scoreValue').textContent = score;
+            
+            // Update expertise level based on score
+            const expertiseLevel = document.getElementById('expertiseLevel');
+            if (score >= 1000) {
+                expertiseLevel.textContent = 'EXPERT';
+                expertiseLevel.style.background = 'linear-gradient(135deg, var(--accent-cyan), var(--neon-blue))';
+            } else if (score >= 600) {
+                expertiseLevel.textContent = 'ADVANCED';
+                expertiseLevel.style.background = 'linear-gradient(135deg, var(--professional-gold), #f4d03f)';
+            } else if (score >= 300) {
+                expertiseLevel.textContent = 'INTERMEDIATE';
+                expertiseLevel.style.background = 'linear-gradient(135deg, var(--neon-purple), var(--professional-gold))';
+            }
+        }
+
+        function updateAccuracy() {
+            const accuracy = Math.round((correctAnswers / currentQuestion) * 100);
+            document.getElementById('accuracy').textContent = accuracy + '%';
+            
+            // Update industry ranking based on performance
+            if (accuracy >= 90) {
+                document.getElementById('ranking').textContent = 'TOP 5%';
+            } else if (accuracy >= 80) {
+                document.getElementById('ranking').textContent = 'TOP 15%';
+            } else if (accuracy >= 70) {
+                document.getElementById('ranking').textContent = 'TOP 30%';
+            } else {
+                document.getElementById('ranking').textContent = 'DEVELOPING';
+            }
+        }
+
+        function endAssessment() {
+            clearInterval(timerInterval);
+            document.getElementById('finalScore').textContent = score;
+            
+            // Determine performance grade
+            const accuracy = (correctAnswers / professionalQuestions.length) * 100;
+            let grade = 'DEVELOPING';
+            if (accuracy >= 90) grade = 'EXCEPTIONAL';
+            else if (accuracy >= 80) grade = 'EXPERT LEVEL';
+            else if (accuracy >= 70) grade = 'PROFICIENT';
+            else if (accuracy >= 60) grade = 'COMPETENT';
+            
+            document.getElementById('performanceGrade').textContent = grade;
+            document.getElementById('assessmentComplete').style.display = 'flex';
+            playProfessionalFeedback('complete');
+        }
+
+        function restartAssessment() {
+            currentQuestion = 1;
+            score = 0;
+            correctAnswers = 0;
+            updateScore();
+            document.getElementById('assessmentComplete').style.display = 'none';
+            loadQuestion();
+            startTimer();
+        }
+
+        function playProfessionalFeedback(type) {
+            const body = document.body;
+            if (type === 'correct') {
+                body.style.boxShadow = 'inset 0 0 100px rgba(212, 175, 55, 0.3)';
+            } else if (type === 'incorrect') {
+                body.style.boxShadow = 'inset 0 0 100px rgba(255, 71, 87, 0.3)';
+            } else if (type === 'complete') {
+                body.style.boxShadow = 'inset 0 0 150px rgba(50, 247, 166, 0.4)';
+            }
+            
+            setTimeout(() => {
+                body.style.boxShadow = 'none';
+            }, 800);
+        }
+
+        // Initialize assessment on load
+        document.addEventListener('DOMContentLoaded', initializeAssessment);
+
+        // Professional keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '1' && e.key <= '4') {
+                const options = document.querySelectorAll('.answer-option');
+                if (options[e.key - 1] && !selectedAnswer) {
+                    options[e.key - 1].click();
+                }
+            }
+            if (e.key === 'Enter' && !document.getElementById('nextBtn').disabled) {
+                nextQuestion();
+            }
+        });
+
+        // Add CSS for urgent timer animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes timer-urgent {
+                0%, 100% { transform: scale(1); color: #ff4757; }
+                50% { transform: scale(1.2); color: #ff3742; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Hub - SkillTrove</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Raleway:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2746a3;
+            --secondary-blue: #296dae;
+            --accent-cyan: #32f7a6;
+            --gradient-teal: #38dedd;
+            --soft-sky: #f6f9fd;
+            --white: #ffffff;
+            --card-shadow: #c5dbff31;
+            --card-border: #cae8ff;
+            --gold-star: #ffc034;
+            --soft-yellow: #fff081;
+            --orange-accent: #ff8d54;
+            --pink-accent: #ff3c6a;
+            --success-green: #32f7a6;
+            --text-main: #264072;
+            --header-navy: #23375b;
+            --footer-gradient: #284274;
+            --community-purple: #8b5cf6;
+            --community-pink: #ec4899;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--soft-sky) 0%, var(--white) 100%);
+            min-height: 100vh;
+            color: var(--text-main);
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(39, 70, 163, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Raleway', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: var(--accent-cyan);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-blue);
+            background: rgba(39, 70, 163, 0.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue), var(--community-purple));
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float-bg 20s linear infinite;
+        }
+
+        @keyframes float-bg {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100px); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 3rem;
+        }
+
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-community {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Discussion Cards */
+        .discussion-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px var(--card-shadow);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        .discussion-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(39, 70, 163, 0.15);
+        }
+
+        .discussion-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--community-purple), var(--community-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .user-info h4 {
+            color: var(--header-navy);
+            font-weight: 600;
+        }
+
+        .user-info .timestamp {
+            color: var(--text-main);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .discussion-content {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .discussion-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: var(--soft-sky);
+            color: var(--primary-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .discussion-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .action-btn:hover {
+            background: var(--soft-sky);
+            color: var(--primary-blue);
+        }
+
+        .action-btn.liked {
+            color: var(--pink-accent);
+        }
+
+        /* Sidebar Components */
+        .sidebar-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px var(--card-shadow);
+            border: 1px solid var(--card-border);
+        }
+
+        .sidebar-card h3 {
+            color: var(--header-navy);
+            margin-bottom: 1rem;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .trending-topic {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+
+        .trending-topic:hover {
+            background: var(--soft-sky);
+        }
+
+        .trending-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+        }
+
+        .trending-info h4 {
+            color: var(--header-navy);
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .trending-info p {
+            color: var(--text-main);
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+        }
+
+        .leaderboard-rank {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--gold-star);
+            color: var(--header-navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .leaderboard-rank.first {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+        }
+
+        .leaderboard-rank.second {
+            background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+        }
+
+        .leaderboard-rank.third {
+            background: linear-gradient(135deg, #cd7f32, #daa520);
+        }
+
+        /* Create Post */
+        .create-post {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px var(--card-shadow);
+            border: 1px solid var(--card-border);
+            margin-bottom: 2rem;
+        }
+
+        .create-post textarea {
+            width: 100%;
+            border: 2px solid var(--card-border);
+            border-radius: 10px;
+            padding: 1rem;
+            font-size: 1rem;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 1rem;
+        }
+
+        .create-post textarea:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 3px rgba(50, 247, 166, 0.1);
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .post-option {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .post-option:hover {
+            background: var(--soft-sky);
+            color: var(--primary-blue);
+        }
+
+        .post-btn {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .post-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(39, 70, 163, 0.3);
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--white);
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 200;
+            box-shadow: 0 5px 15px rgba(39, 70, 163, 0.2);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateX(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="window.location.href='index.html'">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                SkillTrove
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="community.html" class="active">Community Hub</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="internships.html">Internships</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-users"></i> Community Hub</h1>
+            <p>Connect, collaborate, and grow together with fellow learners and professionals</p>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <div class="content-area">
+            <!-- Create Post Section -->
+            <div class="create-post">
+                <h3 style="color: var(--header-navy); margin-bottom: 1rem;">Share with the Community</h3>
+                <textarea placeholder="What's on your mind? Share your thoughts, ask questions, or start a discussion..."></textarea>
+                <div class="post-actions">
+                    <div class="post-options">
+                        <button class="post-option" title="Add Image">
+                            <i class="fas fa-image"></i>
+                        </button>
+                        <button class="post-option" title="Add Poll">
+                            <i class="fas fa-poll"></i>
+                        </button>
+                        <button class="post-option" title="Add Code">
+                            <i class="fas fa-code"></i>
+                        </button>
+                        <button class="post-option" title="Add Link">
+                            <i class="fas fa-link"></i>
+                        </button>
+                    </div>
+                    <button class="post-btn" onclick="createPost()">
+                        <i class="fas fa-paper-plane"></i> Post
+                    </button>
+                </div>
+            </div>
+
+            <!-- Discussion Feed -->
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <div class="user-avatar">S</div>
+                    <div class="user-info">
+                        <h4>Sarayu</h4>
+                        <div class="timestamp">2 hours ago</div>
+                    </div>
+                </div>
+                <div class="discussion-content">
+                    <p>Just completed the JavaScript fundamentals course! The interactive exercises were amazing. Has anyone tried the React advanced track yet? Looking for study partners! 🚀</p>
+                </div>
+                <div class="discussion-tags">
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">React</span>
+                    <span class="tag">Study Group</span>
+                </div>
+                <div class="discussion-actions">
+                    <button class="action-btn" onclick="toggleLike(this)">
+                        <i class="fas fa-heart"></i> <span>24</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-comment"></i> <span>8</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-share"></i> <span>3</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <div class="user-avatar">E</div>
+                    <div class="user-info">
+                        <h4>Eshani</h4>
+                        <div class="timestamp">5 hours ago</div>
+                    </div>
+                </div>
+                <div class="discussion-content">
+                    <p>Sharing my project: A machine learning model for predicting student performance! Used Python and TensorFlow. Would love feedback from the community. The model achieved 94% accuracy! 📊</p>
+                </div>
+                <div class="discussion-tags">
+                    <span class="tag">Machine Learning</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Project Showcase</span>
+                </div>
+                <div class="discussion-actions">
+                    <button class="action-btn liked" onclick="toggleLike(this)">
+                        <i class="fas fa-heart"></i> <span>42</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-comment"></i> <span>15</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-share"></i> <span>7</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <div class="user-avatar">M</div>
+                    <div class="user-info">
+                        <h4>Mahita</h4>
+                        <div class="timestamp">1 day ago</div>
+                    </div>
+                </div>
+                <div class="discussion-content">
+                    <p>Quick tip for everyone preparing for technical interviews: Practice explaining your code out loud! It really helps with confidence. Also, don't forget to ask questions about the company culture. Good luck everyone! 💪</p>
+                </div>
+                <div class="discussion-tags">
+                    <span class="tag">Interview Tips</span>
+                    <span class="tag">Career Advice</span>
+                    <span class="tag">Motivation</span>
+                </div>
+                <div class="discussion-actions">
+                    <button class="action-btn" onclick="toggleLike(this)">
+                        <i class="fas fa-heart"></i> <span>67</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-comment"></i> <span>23</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-share"></i> <span>12</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <div class="user-avatar">A</div>
+                    <div class="user-info">
+                        <h4>Alex Chen</h4>
+                        <div class="timestamp">2 days ago</div>
+                    </div>
+                </div>
+                <div class="discussion-content">
+                    <p>Starting a study group for Data Structures and Algorithms! We'll meet virtually every Tuesday and Thursday at 7 PM. Focus on LeetCode problems and interview prep. Comment below if interested! 🧠</p>
+                </div>
+                <div class="discussion-tags">
+                    <span class="tag">Study Group</span>
+                    <span class="tag">DSA</span>
+                    <span class="tag">Interview Prep</span>
+                </div>
+                <div class="discussion-actions">
+                    <button class="action-btn" onclick="toggleLike(this)">
+                        <i class="fas fa-heart"></i> <span>89</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-comment"></i> <span>34</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-share"></i> <span>18</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-community">
+            <!-- Trending Topics -->
+            <div class="sidebar-card">
+                <h3><i class="fas fa-fire"></i> Trending Topics</h3>
+                <div class="trending-topic">
+                    <div class="trending-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="trending-info">
+                        <h4>JavaScript ES6+</h4>
+                        <p>234 discussions</p>
+                    </div>
+                </div>
+                <div class="trending-topic">
+                    <div class="trending-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="trending-info">
+                        <h4>Machine Learning</h4>
+                        <p>189 discussions</p>
+                    </div>
+                </div>
+                <div class="trending-topic">
+                    <div class="trending-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="trending-info">
+                        <h4>Career Advice</h4>
+                        <p>156 discussions</p>
+                    </div>
+                </div>
+                <div class="trending-topic">
+                    <div class="trending-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="trending-info">
+                        <h4>Study Groups</h4>
+                        <p>98 discussions</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community Leaderboard -->
+            <div class="sidebar-card">
+                <h3><i class="fas fa-trophy"></i> Community Leaders</h3>
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank first">1</div>
+                    <div class="trending-info">
+                        <h4>Eshani</h4>
+                        <p>2,450 points</p>
+                    </div>
+                </div>
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank second">2</div>
+                    <div class="trending-info">
+                        <h4>Mahita</h4>
+                        <p>2,180 points</p>
+                    </div>
+                </div>
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank third">3</div>
+                    <div class="trending-info">
+                        <h4>Sarayu</h4>
+                        <p>1,960 points</p>
+                    </div>
+                </div>
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank">4</div>
+                    <div class="trending-info">
+                        <h4>Alex Chen</h4>
+                        <p>1,840 points</p>
+                    </div>
+                </div>
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank">5</div>
+                    <div class="trending-info">
+                        <h4>Priya Sharma</h4>
+                        <p>1,720 points</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Online Members -->
+            <div class="sidebar-card">
+                <h3><i class="fas fa-circle" style="color: var(--success-green);"></i> Online Now</h3>
+                <div class="trending-topic">
+                    <div class="user-avatar">S</div>
+                    <div class="trending-info">
+                        <h4>Sarayu</h4>
+                        <p>Active now</p>
+                    </div>
+                </div>
+                <div class="trending-topic">
+                    <div class="user-avatar">M</div>
+                    <div class="trending-info">
+                        <h4>Mahita</h4>
+                        <p>Active 5 min ago</p>
+                    </div>
+                </div>
+                <div class="trending-topic">
+                    <div class="user-avatar">R</div>
+                    <div class="trending-info">
+                        <h4>Rahul</h4>
+                        <p>Active 12 min ago</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="sidebar-card">
+                <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                <button class="post-btn" style="width: 100%; margin-bottom: 0.5rem;" onclick="window.location.href='projects.html'">
+                    <i class="fas fa-project-diagram"></i> Browse Projects
+                </button>
+                <button class="post-btn" style="width: 100%; margin-bottom: 0.5rem;" onclick="window.location.href='internships.html'">
+                    <i class="fas fa-briefcase"></i> Find Internships
+                </button>
+                <button class="post-btn" style="width: 100%;" onclick="startStudyGroup()">
+                    <i class="fas fa-users"></i> Start Study Group
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleLike(button) {
+            button.classList.toggle('liked');
+            const countSpan = button.querySelector('span');
+            let count = parseInt(countSpan.textContent);
+            
+            if (button.classList.contains('liked')) {
+                count++;
+                button.style.color = 'var(--pink-accent)';
+            } else {
+                count--;
+                button.style.color = 'var(--text-main)';
+            }
+            
+            countSpan.textContent = count;
+        }
+
+        function createPost() {
+            const textarea = document.querySelector('.create-post textarea');
+            const content = textarea.value.trim();
+            
+            if (content) {
+                // Create new post element
+                const newPost = document.createElement('div');
+                newPost.className = 'discussion-card';
+                newPost.style.animation = 'slideInUp 0.5s ease-out';
+                newPost.innerHTML = `
+                    <div class="discussion-header">
+                        <div class="user-avatar">Y</div>
+                        <div class="user-info">
+                            <h4>You</h4>
+                            <div class="timestamp">Just now</div>
+                        </div>
+                    </div>
+                    <div class="discussion-content">
+                        <p>${content}</p>
+                    </div>
+                    <div class="discussion-tags">
+                        <span class="tag">New Post</span>
+                    </div>
+                    <div class="discussion-actions">
+                        <button class="action-btn" onclick="toggleLike(this)">
+                            <i class="fas fa-heart"></i> <span>0</span>
+                        </button>
+                        <button class="action-btn">
+                            <i class="fas fa-comment"></i> <span>0</span>
+                        </button>
+                        <button class="action-btn">
+                            <i class="fas fa-share"></i> <span>0</span>
+                        </button>
+                    </div>
+                `;
+                
+                // Insert after create post section
+                const createPostSection = document.querySelector('.create-post');
+                createPostSection.parentNode.insertBefore(newPost, createPostSection.nextSibling);
+                
+                // Clear textarea
+                textarea.value = '';
+                
+                // Show success message
+                showNotification('Post shared successfully!', 'success');
+            }
+        }
+
+        function startStudyGroup() {
+            showNotification('Study group feature coming soon! Join our Discord for now.', 'info');
+        }
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                background: ${type === 'success' ? 'var(--success-green)' : 'var(--primary-blue)'};
+                color: var(--white);
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+                animation: slideInRight 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Add slide in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(100px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Auto-resize textarea
+        document.querySelector('.create-post textarea').addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+    </script>
+</body>
+</html>

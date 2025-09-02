@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Portal - SkillTrove</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Raleway:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2746a3;
+            --secondary-blue: #296dae;
+            --accent-cyan: #32f7a6;
+            --gradient-teal: #38dedd;
+            --soft-sky: #f6f9fd;
+            --white: #ffffff;
+            --card-shadow: #c5dbff31;
+            --card-border: #cae8ff;
+            --gold-star: #ffc034;
+            --soft-yellow: #fff081;
+            --orange-accent: #ff8d54;
+            --pink-accent: #ff3c6a;
+            --success-green: #32f7a6;
+            --text-main: #264072;
+            --header-navy: #23375b;
+            --footer-gradient: #284274;
+            --internship-green: #10b981;
+            --internship-blue: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--soft-sky) 0%, var(--white) 100%);
+            min-height: 100vh;
+            color: var(--text-main);
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(39, 70, 163, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Raleway', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: var(--accent-cyan);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-blue);
+            background: rgba(39, 70, 163, 0.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue), var(--internship-green));
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="10" y="10" width="20" height="20" fill="rgba(255,255,255,0.05)" transform="rotate(45 20 20)"/><rect x="70" y="30" width="15" height="15" fill="rgba(255,255,255,0.05)" transform="rotate(45 77.5 37.5)"/></svg>');
+            animation: float-shapes 20s linear infinite;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-value {
+            font-family: 'Raleway', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-stat-label {
+            opacity: 0.8;
+            font-weight: 500;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: var(--white);
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--card-border);
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-box input {
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--card-border);
+            border-radius: 25px;
+            font-size: 1rem;
+            width: 300px;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
+        .search-btn {
+            background: var(--accent-cyan);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .search-btn:hover {
+            background: var(--gradient-teal);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 3rem;
+        }
+
+        .internships-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-internships {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Internship Cards */
+        .internship-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px var(--card-shadow);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .internship-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--internship-green), var(--internship-blue));
+            transition: left 0.5s;
+        }
+
+        .internship-card:hover::before {
+            left: 0;
+        }
+
+        .internship-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(39, 70, 163, 0.2);
+        }
+
+        .internship-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .company-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .company-details h3 {
+            font-family: 'Raleway', sans-serif;
+            color: var(--header-navy);
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .company-name {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .internship-type {
+            background: var(--internship-green);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .internship-type.remote {
+            background: var(--internship-blue);
+        }
+
+        .internship-type.hybrid {
+            background: var(--orange-accent);
+        }
+
+        .internship-description {
+            color: var(--text-main);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .internship-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-item {
+            background: var(--soft-sky);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .detail-icon {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-value {
+            font-weight: 700;
+            color: var(--header-navy);
+            margin-bottom: 0.2rem;
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: var(--text-main);
+            opacity: 0.7;
+        }
+
+        .required-skills {
+            margin-bottom: 1.5rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .internship-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-apply {
+            background: linear-gradient(135deg, var(--internship-green), var(--accent-cyan));
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            flex: 1;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-apply:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-save {
+            background: var(--white);
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            padding: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 60px;
+        }
+
+        .btn-save:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* Sidebar Components */
+        .sidebar-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px var(--card-shadow);
+            border: 1px solid var(--card-border);
+        }
+
+        .sidebar-card h3 {
+            color: var(--header-navy);
+            margin-bottom: 1rem;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .trending-company {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            transition: background 0.3s;
+            cursor: pointer;
+            margin-bottom: 0.5rem;
+        }
+
+        .trending-company:hover {
+            background: var(--soft-sky);
+        }
+
+        .company-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .company-info h4 {
+            color: var(--header-navy);
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .company-info p {
+            color: var(--text-main);
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .application-status {
+            background: var(--soft-sky);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            border-left: 4px solid var(--internship-green);
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-label {
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .status-value {
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--white);
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 200;
+            box-shadow: 0 5px 15px rgba(39, 70, 163, 0.2);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateX(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                padding: 2rem 1rem;
+            }
+            
+            .filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-row {
+                justify-content: center;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .search-box input {
+                width: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="window.location.href='index.html'">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                SkillTrove
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="community.html">Community Hub</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="internships.html" class="active">Internships</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-briefcase"></i> Internship Portal</h1>
+            <p>Launch your career with exciting internship opportunities from top companies</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-value">500+</div>
+                    <div class="hero-stat-label">Active Internships</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">150+</div>
+                    <div class="hero-stat-label">Partner Companies</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">95%</div>
+                    <div class="hero-stat-label">Success Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="filter-section">
+        <div class="filter-container">
+            <div class="filter-row">
+                <select class="filter-select" id="locationFilter">
+                    <option value="">All Locations</option>
+                    <option value="remote">Remote</option>
+                    <option value="onsite">On-site</option>
+                    <option value="hybrid">Hybrid</option>
+                </select>
+                <select class="filter-select" id="fieldFilter">
+                    <option value="">All Fields</option>
+                    <option value="software">Software Development</option>
+                    <option value="data">Data Science</option>
+                    <option value="design">UI/UX Design</option>
+                    <option value="marketing">Digital Marketing</option>
+                    <option value="finance">Finance</option>
+                </select>
+                <select class="filter-select" id="durationFilter">
+                    <option value="">All Durations</option>
+                    <option value="summer">Summer (3 months)</option>
+                    <option value="semester">Semester (6 months)</option>
+                    <option value="year">Full Year</option>
+                </select>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Search internships..." id="searchInput">
+                <button class="search-btn" onclick="searchInternships()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <div class="internships-list">
+            <!-- Featured Internship -->
+            <div class="internship-card" style="border: 3px solid var(--gold-star); background: linear-gradient(135deg, var(--white), var(--soft-sky));">
+                <div style="background: var(--gold-star); color: var(--header-navy); padding: 0.5rem 1rem; border-radius: 15px; display: inline-block; margin-bottom: 1rem; font-weight: 700;">
+                    <i class="fas fa-star"></i> FEATURED OPPORTUNITY
+                </div>
+                <div class="internship-header">
+                    <div class="company-info">
+                        <div class="company-logo">G</div>
+                        <div class="company-details">
+                            <h3>Software Engineering Intern</h3>
+                            <div class="company-name">Google</div>
+                        </div>
+                    </div>
+                    <div class="internship-type">Remote</div>
+                </div>
+                <p class="internship-description">
+                    Join Google's innovative team to work on cutting-edge projects that impact millions of users worldwide. You'll collaborate with senior engineers on real products while learning industry best practices.
+                </p>
+                <div class="internship-details">
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-calendar"></i></div>
+                        <div class="detail-value">3 Months</div>
+                        <div class="detail-label">Duration</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="detail-value">$8,000/mo</div>
+                        <div class="detail-label">Stipend</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-clock"></i></div>
+                        <div class="detail-value">Full-time</div>
+                        <div class="detail-label">Commitment</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-users"></i></div>
+                        <div class="detail-value">5-10</div>
+                        <div class="detail-label">Team Size</div>
+                    </div>
+                </div>
+                <div class="required-skills">
+                    <h4 style="color: var(--header-navy); margin-bottom: 0.5rem;">Required Skills:</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Algorithms</span>
+                        <span class="skill-tag">System Design</span>
+                    </div>
+                </div>
+                <div class="internship-actions">
+                    <a href="#" class="btn-apply">
+                        <i class="fas fa-paper-plane"></i> Apply Now
+                    </a>
+                    <button class="btn-save">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Regular Internships -->
+            <div class="internship-card" data-field="software" data-location="remote">
+                <div class="internship-header">
+                    <div class="company-info">
+                        <div class="company-logo" style="background: linear-gradient(135deg, #1877f2, #42a5f5);">M</div>
+                        <div class="company-details">
+                            <h3>Frontend Developer Intern</h3>
+                            <div class="company-name">Microsoft</div>
+                        </div>
+                    </div>
+                    <div class="internship-type remote">Remote</div>
+                </div>
+                <p class="internship-description">
+                    Work on user-facing features for Microsoft's cloud products. Gain experience with modern frontend technologies and collaborate with UX designers.
+                </p>
+                <div class="internship-details">
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-calendar"></i></div>
+                        <div class="detail-value">6 Months</div>
+                        <div class="detail-label">Duration</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="detail-value">$6,500/mo</div>
+                        <div class="detail-label">Stipend</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-clock"></i></div>
+                        <div class="detail-value">Full-time</div>
+                        <div class="detail-label">Commitment</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="detail-value">Global</div>
+                        <div class="detail-label">Location</div>
+                    </div>
+                </div>
+                <div class="required-skills">
+                    <h4 style="color: var(--header-navy); margin-bottom: 0.5rem;">Required Skills:</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">Azure</span>
+                    </div>
+                </div>
+                <div class="internship-actions">
+                    <a href="#" class="btn-apply">
+                        <i class="fas fa-paper-plane"></i> Apply Now
+                    </a>
+                    <button class="btn-save">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="internship-card" data-field="data" data-location="hybrid">
+                <div class="internship-header">
+                    <div class="company-info">
+                        <div class="company-logo" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">N</div>
+                        <div class="company-details">
+                            <h3>Data Science Intern</h3>
+                            <div class="company-name">Netflix</div>
+                        </div>
+                    </div>
+                    <div class="internship-type hybrid">Hybrid</div>
+                </div>
+                <p class="internship-description">
+                    Analyze user behavior data to improve content recommendations. Work with large datasets and machine learning models.
+                </p>
+                <div class="internship-details">
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-calendar"></i></div>
+                        <div class="detail-value">4 Months</div>
+                        <div class="detail-label">Duration</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="detail-value">$7,200/mo</div>
+                        <div class="detail-label">Stipend</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-clock"></i></div>
+                        <div class="detail-value">Full-time</div>
+                        <div class="detail-label">Commitment</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="detail-value">Los Gatos, CA</div>
+                        <div class="detail-label">Location</div>
+                    </div>
+                </div>
+                <div class="required-skills">
+                    <h4 style="color: var(--header-navy); margin-bottom: 0.5rem;">Required Skills:</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Statistics</span>
+                    </div>
+                </div>
+                <div class="internship-actions">
+                    <a href="#" class="btn-apply">
+                        <i class="fas fa-paper-plane"></i> Apply Now
+                    </a>
+                    <button class="btn-save">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="internship-card" data-field="design" data-location="onsite">
+                <div class="internship-header">
+                    <div class="company-info">
+                        <div class="company-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">A</div>
+                        <div class="company-details">
+                            <h3>UX Design Intern</h3>
+                            <div class="company-name">Adobe</div>
+                        </div>
+                    </div>
+                    <div class="internship-type">On-site</div>
+                </div>
+                <p class="internship-description">
+                    Design intuitive user experiences for Adobe's creative tools. Work closely with product managers and developers to bring designs to life.
+                </p>
+                <div class="internship-details">
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-calendar"></i></div>
+                        <div class="detail-value">3 Months</div>
+                        <div class="detail-label">Duration</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="detail-value">$5,800/mo</div>
+                        <div class="detail-label">Stipend</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-clock"></i></div>
+                        <div class="detail-value">Full-time</div>
+                        <div class="detail-label">Commitment</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="detail-value">San Jose, CA</div>
+                        <div class="detail-label">Location</div>
+                    </div>
+                </div>
+                <div class="required-skills">
+                    <h4 style="color: var(--header-navy); margin-bottom: 0.5rem;">Required Skills:</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Adobe XD</span>
+                        <span class="skill-tag">Prototyping</span>
+                        <span class="skill-tag">User Research</span>
+                    </div>
+                </div>
+                <div class="internship-actions">
+                    <a href="#" class="btn-apply">
+                        <i class="fas fa-paper-plane"></i> Apply Now
+                    </a>
+                    <button class="btn-save">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="internship-card" data-field="software" data-location="hybrid">
+                <div class="internship-header">
+                    <div class="company-info">
+                        <div class="company-logo" style="background: linear-gradient(135deg, #00d4aa, #00b894);">S</div>
+                        <div class="company-details">
+                            <h3>Full Stack Developer Intern</h3>
+                            <div class="company-name">Spotify</div>
+                        </div>
+                    </div>
+                    <div class="internship-type hybrid">Hybrid</div>
+                </div>
+                <p class="internship-description">
+                    Build features for Spotify's music streaming platform. Work on both frontend and backend systems that serve millions of users daily.
+                </p>
+                <div class="internship-details">
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-calendar"></i></div>
+                        <div class="detail-value">6 Months</div>
+                        <div class="detail-label">Duration</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="detail-value">$6,000/mo</div>
+                        <div class="detail-label">Stipend</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-clock"></i></div>
+                        <div class="detail-value">Full-time</div>
+                        <div class="detail-label">Commitment</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="detail-value">Stockholm</div>
+                        <div class="detail-label">Location</div>
+                    </div>
+                </div>
+                <div class="required-skills">
+                    <h4 style="color: var(--header-navy); margin-bottom: 0.5rem;">Required Skills:</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">GraphQL</span>
+                        <span class="skill-tag">Microservices</span>
+                    </div>
+                </div>
+                <div class="internship-actions">
+                    <a href="#" class="btn-apply">
+                        <i class="fas fa-paper-plane"></i> Apply Now
+                    </a>
+                    <button class="btn-save">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-internships">
+            <!-- Application Status -->
+            <div class="sidebar-card">
+                <h3><i class="fas fa-chart-pie"></i> Your Applications</h3>
+                <div class="application-status">
+                    <div class="status-item">
+                        <span class="status-label">Applied</span>
+                        <span class="status-value">12</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">In Review</span>
+                        <span class="status-value">5</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Interviews</span>
+                        <span class="status-value">2</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Offers</span>
+                        <span class="status-value">1</span>
+                    </div>
+                </div>
+                <button class="btn-apply" style="width: 100%; margin-top: 1rem;">
+                    <i class="fas fa-list"></i> View All Applications
+                </button>
+            </div>
+
+            <!-- Top Companies -->
+            <div class="sidebar-card">
+                <h3><i class="fas fa-building"></i> Top Hiring Companies</h3>
+                <div class="trending-company">
+                    <div class="company-icon">G</div>
+                    <div class="company-info">
+                        <h4>Google</h4>
+                        <p>15 open positions</p>
+                    </div>
+                </div>
+                <div class="trending-company">
+                    <div class="company-icon" style="background: linear-gradient(135deg, #1877f2, #42a5f5);">M</div>
+                    <div class="company-info">
+                        <h4>Microsoft</h4>
+                        <p>12 open positions</p>
+                    </div>
+                </div>
+                <div class="trending-company">
+                    <div class="company-icon" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">N</div>
+                    <div class="company-info">
+                        <h4>Netflix</h4>
+                        <p>8 open positions</p>
+                    </div>
+                </div>
+                <div class="trending-company">
+                    <div class="company-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">A</div>
+                    <div class="company-info">
+                        <h4>Adobe</h4>
+                        <p>10 open positions</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Tips -->
+            <div class="sidebar-card">
+                <h3><i class="fas fa-lightbulb"></i> Application Tips</h3>
+                <div style="color: var(--text-main); line-height: 1.6; font-size: 0.9rem;">
+                    <p style="margin-bottom: 1rem;"><strong>✨ Stand Out:</strong> Customize your application for each company and role.</p>
+                    <p style="margin-bottom: 1rem;"><strong>🚀 Portfolio:</strong> Showcase your best projects with clear documentation.</p>
+                    <p style="margin-bottom: 1rem;"><strong>🤝 Network:</strong> Connect with current employees on LinkedIn.</p>
+                    <p><strong>📝 Prepare:</strong> Practice coding interviews and system design questions.</p>
+                </div>
+            </div>
+
+            <!-- Success Stories -->
+            <div class="sidebar-card">
+                <h3><i class="fas fa-trophy"></i> Success Stories</h3>
+                <div class="trending-company">
+                    <div class="company-icon" style="background: var(--success-green);">E</div>
+                    <div class="company-info">
+                        <h4>Eshani got hired at Google!</h4>
+                        <p>Software Engineering Intern</p>
+                    </div>
+                </div>
+                <div class="trending-company">
+                    <div class="company-icon" style="background: var(--gold-star);">M</div>
+                    <div class="company-info">
+                        <h4>Mahita joined Microsoft!</h4>
+                        <p>Product Management Intern</p>
+                    </div>
+                </div>
+                <div class="trending-company">
+                    <div class="company-icon" style="background: var(--pink-accent);">S</div>
+                    <div class="company-info">
+                        <h4>Sarayu at Amazon!</h4>
+                        <p>Cloud Solutions Intern</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function searchInternships() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const internshipCards = document.querySelectorAll('.internship-card');
+
+            internshipCards.forEach(card => {
+                const title = card.querySelector('.project-title, h3').textContent.toLowerCase();
+                const company = card.querySelector('.company-name').textContent.toLowerCase();
+                const description = card.querySelector('.internship-description').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || company.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeInUp 0.5s ease-out';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function filterByField() {
+            const field = document.getElementById('fieldFilter').value;
+            const location = document.getElementById('locationFilter').value;
+            const duration = document.getElementById('durationFilter').value;
+            
+            document.querySelectorAll('.internship-card').forEach(card => {
+                const cardField = card.dataset.field;
+                const cardLocation = card.dataset.location;
+                
+                let shouldShow = true;
+                
+                if (field && cardField !== field) shouldShow = false;
+                if (location && cardLocation !== location) shouldShow = false;
+                
+                if (shouldShow) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeInUp 0.5s ease-out';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Add event listeners to filters
+        document.getElementById('fieldFilter').addEventListener('change', filterByField);
+        document.getElementById('locationFilter').addEventListener('change', filterByField);
+        document.getElementById('durationFilter').addEventListener('change', filterByField);
+
+        // Add animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes float-shapes {
+                0% { transform: translateY(0) rotate(0deg); }
+                100% { transform: translateY(-100px) rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize internship cards with staggered animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.internship-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchInternships();
+            }
+        });
+
+        // Save internship functionality
+        document.querySelectorAll('.btn-save').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('saved');
+                if (this.classList.contains('saved')) {
+                    this.style.background = var(--success-green);
+                    this.style.color = var(--white);
+                    this.innerHTML = '<i class="fas fa-bookmark"></i>';
+                } else {
+                    this.style.background = var(--white);
+                    this.style.color = var(--primary-blue);
+                    this.innerHTML = '<i class="far fa-bookmark"></i>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

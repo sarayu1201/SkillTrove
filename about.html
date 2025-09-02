@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - SkillTrove</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Raleway:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2746a3;
+            --secondary-blue: #296dae;
+            --accent-cyan: #32f7a6;
+            --gradient-teal: #38dedd;
+            --soft-sky: #f6f9fd;
+            --white: #ffffff;
+            --card-shadow: #c5dbff31;
+            --card-border: #cae8ff;
+            --gold-star: #ffc034;
+            --soft-yellow: #fff081;
+            --orange-accent: #ff8d54;
+            --pink-accent: #ff3c6a;
+            --success-green: #32f7a6;
+            --text-main: #264072;
+            --header-navy: #23375b;
+            --footer-gradient: #284274;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--soft-sky) 0%, var(--white) 100%);
+            min-height: 100vh;
+            color: var(--text-main);
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(39, 70, 163, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Raleway', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: var(--accent-cyan);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-blue);
+            background: rgba(39, 70, 163, 0.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float-bg 25s linear infinite;
+        }
+
+        @keyframes float-bg {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-50px) translateY(-50px); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            padding: 4rem 2rem;
+            background: var(--white);
+        }
+
+        .mission-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .mission-container h2 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 2.5rem;
+            color: var(--header-navy);
+            margin-bottom: 2rem;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .mission-card {
+            background: var(--soft-sky);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            transition: transform 0.3s ease;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .mission-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .mission-card h3 {
+            font-family: 'Raleway', sans-serif;
+            color: var(--header-navy);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .mission-card p {
+            line-height: 1.6;
+            color: var(--text-main);
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 4rem 2rem;
+            background: var(--soft-sky);
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .team-header h2 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 2.5rem;
+            color: var(--header-navy);
+            margin-bottom: 1rem;
+        }
+
+        .team-header p {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .team-card {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 40px var(--card-shadow);
+            border: 1px solid var(--card-border);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(50, 247, 166, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .team-card:hover::before {
+            left: 100%;
+        }
+
+        .team-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(39, 70, 163, 0.2);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+            font-weight: 700;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(39, 70, 163, 0.3);
+        }
+
+        .team-avatar::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--primary-blue), var(--pink-accent), var(--orange-accent));
+            z-index: -1;
+            animation: rotate-border 4s linear infinite;
+        }
+
+        @keyframes rotate-border {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .team-name {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--header-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-role {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-description {
+            color: var(--text-main);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .team-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .skill-badge {
+            background: var(--soft-sky);
+            color: var(--primary-blue);
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent-cyan);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(50, 247, 166, 0.4);
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 4rem 2rem;
+            background: var(--white);
+        }
+
+        .values-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .values-container h2 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 2.5rem;
+            color: var(--header-navy);
+            margin-bottom: 3rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-item {
+            padding: 2rem;
+            border-radius: 15px;
+            background: var(--soft-sky);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        .value-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--card-shadow);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .value-item h3 {
+            font-family: 'Raleway', sans-serif;
+            color: var(--header-navy);
+            margin-bottom: 1rem;
+        }
+
+        .value-item p {
+            line-height: 1.6;
+            color: var(--text-main);
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--white);
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 200;
+            box-shadow: 0 5px 15px rgba(39, 70, 163, 0.2);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateX(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .mission-grid, .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-section, .mission-section, .values-section {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="window.location.href='index.html'">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                SkillTrove
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About Us</a></li>
+                    <li><a href="community.html">Community Hub</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="internships.html">Internships</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-heart"></i> About SkillTrove</h1>
+            <p>Empowering learners worldwide through innovative technology, personalized experiences, and a passionate commitment to educational excellence</p>
+        </div>
+    </section>
+
+    <section class="mission-section">
+        <div class="mission-container">
+            <h2>Our Mission</h2>
+            <p style="font-size: 1.2rem; line-height: 1.7; max-width: 800px; margin: 0 auto; color: var(--text-main);">
+                At SkillTrove, we believe that everyone deserves access to quality education and the opportunity to unlock their full potential. We're building the future of learning through cutting-edge technology, gamified experiences, and a supportive community that celebrates growth and achievement.
+            </p>
+            
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Innovation First</h3>
+                    <p>We leverage the latest technologies including AI, machine learning, and gamification to create engaging and effective learning experiences that adapt to each individual's needs.</p>
+                </div>
+                
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community Driven</h3>
+                    <p>Learning is better together. Our platform fosters collaboration, peer support, and knowledge sharing to create a vibrant learning ecosystem.</p>
+                </div>
+                
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-target"></i>
+                    </div>
+                    <h3>Results Focused</h3>
+                    <p>We measure success by the achievements of our learners. Every feature is designed to maximize learning outcomes and career advancement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="team-container">
+            <div class="team-header">
+                <h2>Meet Our Team</h2>
+                <p>The brilliant minds behind SkillTrove, dedicated to revolutionizing education and empowering learners worldwide</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar" style="background: linear-gradient(135deg, var(--pink-accent), var(--orange-accent));">
+                        S
+                    </div>
+                    <h3 class="team-name">Sarayu</h3>
+                    <div class="team-role">Lead Developer & Co-Founder</div>
+                    <p class="team-description">
+                        Passionate full-stack developer with expertise in creating scalable learning platforms. Sarayu leads our technical vision and ensures our platform delivers exceptional user experiences. She specializes in React, Node.js, and cloud architecture.
+                    </p>
+                    <div class="team-skills">
+                        <span class="skill-badge">React</span>
+                        <span class="skill-badge">Node.js</span>
+                        <span class="skill-badge">AWS</span>
+                        <span class="skill-badge">MongoDB</span>
+                        <span class="skill-badge">System Design</span>
+                    </div>
+                    <div class="team-social">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar" style="background: linear-gradient(135deg, var(--accent-cyan), var(--gradient-teal));">
+                        E
+                    </div>
+                    <h3 class="team-name">Eshani</h3>
+                    <div class="team-role">AI/ML Engineer & Co-Founder</div>
+                    <p class="team-description">
+                        Expert in artificial intelligence and machine learning, Eshani develops the intelligent systems that power our personalized learning experiences. She's passionate about using AI to make education more effective and accessible for everyone.
+                    </p>
+                    <div class="team-skills">
+                        <span class="skill-badge">Python</span>
+                        <span class="skill-badge">TensorFlow</span>
+                        <span class="skill-badge">Data Science</span>
+                        <span class="skill-badge">NLP</span>
+                        <span class="skill-badge">Deep Learning</span>
+                    </div>
+                    <div class="team-social">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar" style="background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));">
+                        M
+                    </div>
+                    <h3 class="team-name">Mahita</h3>
+                    <div class="team-role">Product Designer & Co-Founder</div>
+                    <p class="team-description">
+                        Creative product designer and user experience expert, Mahita ensures that every interaction on SkillTrove is intuitive, engaging, and delightful. She brings together aesthetics and functionality to create meaningful learning experiences.
+                    </p>
+                    <div class="team-skills">
+                        <span class="skill-badge">UI/UX Design</span>
+                        <span class="skill-badge">Figma</span>
+                        <span class="skill-badge">User Research</span>
+                        <span class="skill-badge">Prototyping</span>
+                        <span class="skill-badge">Design Systems</span>
+                    </div>
+                    <div class="team-social">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="values-section">
+        <div class="values-container">
+            <h2>Our Values</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Innovation</h3>
+                    <p>We constantly push boundaries to create new and better ways of learning, embracing emerging technologies and creative solutions.</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Collaboration</h3>
+                    <p>We believe in the power of working together, fostering an environment where ideas flourish and everyone contributes to our shared success.</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Empathy</h3>
+                    <p>We understand the challenges learners face and design our platform with compassion, ensuring everyone feels supported on their journey.</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Excellence</h3>
+                    <p>We strive for the highest quality in everything we do, from code quality to user experience, never settling for "good enough".</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: linear-gradient(135deg, var(--primary-blue), var(--footer-gradient)); color: var(--white); text-align: center; padding: 3rem 2rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h3 style="font-family: 'Raleway', sans-serif; font-size: 1.8rem; margin-bottom: 1rem;">Ready to Start Your Journey?</h3>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9;">Join thousands of learners who are already transforming their careers with SkillTrove</p>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <a href="student-login.html" style="background: var(--white); color: var(--primary-blue); padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: 700; transition: all 0.3s;">
+                    <i class="fas fa-user-graduate"></i> Student Portal
+                </a>
+                <a href="professional-login.html" style="background: var(--accent-cyan); color: var(--white); padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: 700; transition: all 0.3s;">
+                    <i class="fas fa-user-tie"></i> Professional Portal
+                </a>
+            </div>
+            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.2);">
+                <p>&copy; 2024 SkillTrove. Built with ❤️ by Sarayu, Eshani, and Mahita.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add scroll animations
+        function observeElements() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.team-card, .mission-card, .value-item').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                observer.observe(el);
+            });
+        }
+
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            observeElements();
+            
+            // Stagger team card animations
+            const teamCards = document.querySelectorAll('.team-card');
+            teamCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }, index * 200);
+            });
+        });
+
+        // Add hover effects to social links
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.1)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
