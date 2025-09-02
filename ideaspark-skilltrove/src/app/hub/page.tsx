@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function HubPage() {
   const [messages, setMessages] = useState<string[]>([]);
@@ -10,11 +10,29 @@ export default function HubPage() {
     { id: 2, title: "Create quiz analytics dashboard", reward: "₹5000" },
   ];
 
-  function send() {
+  async function send() {
     if (!input.trim()) return;
-    setMessages((m) => [...m, input.trim()]);
+    const content = input.trim();
     setInput("");
+    setMessages((m) => [...m, content]);
+    try {
+      await fetch("/api/hub/message", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content }),
+      });
+    } catch {}
   }
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch("/api/hub/message");
+        const data = await res.json();
+        setMessages(data.messages?.map((m: any) => m.content) || []);
+      } catch {}
+    })();
+  }, []);
 
   return (
     <div className="grid md:grid-cols-2 gap-6">

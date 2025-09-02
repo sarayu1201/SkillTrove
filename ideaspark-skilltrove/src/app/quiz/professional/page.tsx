@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Question = {
   q: string;
@@ -15,6 +16,7 @@ const sampleQuestions: Question[] = Array.from({ length: 10 }).map((_, i) => ({
 }));
 
 export default function ProfessionalQuizPage() {
+  const router = useRouter();
   const questions = useMemo(() => sampleQuestions, []);
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -47,7 +49,23 @@ export default function ProfessionalQuizPage() {
     if (timeLeft === 0) handleAnswer(-1);
   }, [timeLeft]);
 
-  function handleAnswer(choiceIndex: number) {
+  // Basic anti-cheat
+  useEffect(() => {
+    function onVisibility() {
+      if (document.hidden) {
+        // For pros, just reduce time as penalty
+        setTimeLeft((t) => Math.max(0, t - 10));
+      }
+    }
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, []);
+
+  function enterFullscreen() {
+    document.documentElement.requestFullscreen?.();
+  }
+
+  async function handleAnswer(choiceIndex: number) {
     if (finished) return;
     const current = questions[index];
     const isCorrect = choiceIndex === current.answerIndex;
@@ -55,6 +73,13 @@ export default function ProfessionalQuizPage() {
     const nextIndex = index + 1;
     if (nextIndex >= questions.length) {
       setFinished(true);
+      try {
+        await fetch("/api/quiz/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ role: "PROFESSIONAL", topic: "General", score: isCorrect ? score + 10 : score }),
+        });
+      } catch {}
     } else {
       setIndex(nextIndex);
       setTimeLeft(60);
@@ -66,6 +91,7 @@ export default function ProfessionalQuizPage() {
       <div className="space-y-4 text-center">
         <h1 className="text-3xl font-bold">Assessment Completed</h1>
         <p className="text-lg">Score: {score}</p>
+        <button onClick={() => router.push("/leaderboard")} className="border rounded px-4 py-2 inline-block">View Leaderboard</button>
         <a
           href={`/api/certificate?name=Professional&score=${score}&role=Professional`}
           className="border rounded px-4 py-2 inline-block"
@@ -78,6 +104,9 @@ export default function ProfessionalQuizPage() {
 
   return (
     <div className="space-y-4">
+      <div className="flex justify-end">
+        <button onClick={enterFullscreen} className="text-xs underline">Enter fullscreen</button>
+      </div>
       <div className="flex items-center justify-between">
         <div className="text-sm">Time left: {timeLeft}s</div>
         <div className="text-sm">Score: {score}</div>

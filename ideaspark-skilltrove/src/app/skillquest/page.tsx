@@ -25,8 +25,14 @@ export default function SkillQuestPage() {
   const [input, setInput] = useState("");
   const [story, setStory] = useState("");
 
-  function handleAsk() {
-    setStory(`StoryBot: Once upon a time, to master "${input}", our hero used patterns, examples, and practice to uncover the core idea...`);
+  async function handleAsk() {
+    const res = await fetch("/api/storybot", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ topic: input }),
+    });
+    const data = await res.json();
+    setStory(data.story || "");
   }
 
   return (

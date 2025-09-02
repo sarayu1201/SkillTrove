@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Question = {
   q: string;
@@ -15,6 +16,7 @@ const sampleQuestions: Question[] = Array.from({ length: 10 }).map((_, i) => ({
 }));
 
 export default function StudentQuizPage() {
+  const router = useRouter();
   const questions = useMemo(() => sampleQuestions, []);
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -49,7 +51,29 @@ export default function StudentQuizPage() {
     if (timeLeft === 0) handleAnswer(-1);
   }, [timeLeft]);
 
-  function handleAnswer(choiceIndex: number) {
+  // Enhanced anti-cheat: visibility and focus penalties
+  useEffect(() => {
+    function onVisibility() {
+      if (document.hidden) {
+        setHearts((h) => (h > 0 ? h - 1 : 0));
+      }
+    }
+    function onBlur() {
+      setHearts((h) => (h > 0 ? h - 1 : 0));
+    }
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("blur", onBlur);
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("blur", onBlur);
+    };
+  }, []);
+
+  function enterFullscreen() {
+    document.documentElement.requestFullscreen?.();
+  }
+
+  async function handleAnswer(choiceIndex: number) {
     if (finished) return;
     const current = questions[index];
     const isCorrect = choiceIndex === current.answerIndex;
@@ -62,6 +86,13 @@ export default function StudentQuizPage() {
     const nextIndex = index + 1;
     if (nextIndex >= questions.length || hearts - (isCorrect ? 0 : 1) <= 0) {
       setFinished(true);
+      try {
+        await fetch("/api/quiz/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ role: "STUDENT", topic: "General", score: isCorrect ? score + 10 : score - 5 }),
+        });
+      } catch {}
     } else {
       setIndex(nextIndex);
       setTimeLeft(60);
@@ -73,6 +104,7 @@ export default function StudentQuizPage() {
       <div className="space-y-4 text-center">
         <h1 className="text-3xl font-bold">Quiz Completed</h1>
         <p className="text-lg">Score: {score}</p>
+        <button onClick={() => router.push("/leaderboard")} className="border rounded px-4 py-2 inline-block">View Leaderboard</button>
         <a
           href={`/api/certificate?name=Student&score=${score}&role=Student`}
           className="border rounded px-4 py-2 inline-block"
@@ -85,6 +117,9 @@ export default function StudentQuizPage() {
 
   return (
     <div className="space-y-4">
+      <div className="flex justify-end">
+        <button onClick={enterFullscreen} className="text-xs underline">Enter fullscreen</button>
+      </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
           {Array.from({ length: hearts }).map((_, i) => (
