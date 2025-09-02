@@ -7,25 +7,49 @@ const topics = [
     title: "Aptitude",
     points: ["Percentages", "Ratios & Proportions", "Time & Work", "Profit & Loss"],
     icon: "🧮",
-    color: "from-blue-500 to-cyan-500"
+    color: "from-blue-500 to-cyan-500",
+    modules: [
+      { name: "Number Systems", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master number theory fundamentals" },
+      { name: "Percentage & Profit Loss", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Learn business mathematics" },
+      { name: "Time & Work", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Solve efficiency problems" },
+      { name: "Speed & Distance", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master motion problems" }
+    ]
   },
   {
     title: "Verbal",
     points: ["Reading Comprehension", "Synonyms/Antonyms", "Sentence Correction"],
     icon: "📚",
-    color: "from-green-500 to-emerald-500"
+    color: "from-green-500 to-emerald-500",
+    modules: [
+      { name: "Grammar Fundamentals", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Build strong grammar foundation" },
+      { name: "Vocabulary Building", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Expand your word power" },
+      { name: "Reading Comprehension", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master text analysis" },
+      { name: "Sentence Correction", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Perfect your writing" }
+    ]
   },
   {
     title: "Reasoning",
     points: ["Puzzles", "Syllogisms", "Series", "Directions"],
     icon: "🧩",
-    color: "from-purple-500 to-pink-500"
+    color: "from-purple-500 to-pink-500",
+    modules: [
+      { name: "Logical Deduction", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master logical thinking" },
+      { name: "Analytical Reasoning", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Solve complex puzzles" },
+      { name: "Pattern Recognition", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Identify sequences" },
+      { name: "Critical Thinking", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Develop analytical skills" }
+    ]
   },
   {
-    title: "Logic Building",
-    points: ["Patterns", "Abstractions", "Problem Decomposition"],
-    icon: "⚡",
-    color: "from-orange-500 to-red-500"
+    title: "Coding",
+    points: ["Data Structures", "Algorithms", "Problem Solving", "Code Optimization"],
+    icon: "💻",
+    color: "from-orange-500 to-red-500",
+    modules: [
+      { name: "Data Structures", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master arrays, lists, trees" },
+      { name: "Algorithms", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Learn sorting and searching" },
+      { name: "Problem Solving", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Crack coding interviews" },
+      { name: "Code Optimization", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Write efficient code" }
+    ]
   },
 ];
 
@@ -68,21 +92,55 @@ export default function SkillQuestPage() {
           {topics.map((t, index) => (
             <div 
               key={t.title} 
-              className="card-hover bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700"
+              className="card-hover bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 transform hover:scale-105 transition-all duration-300"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${t.color} flex items-center justify-center text-2xl mb-6`}>
+              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${t.color} flex items-center justify-center text-2xl mb-6 animate-pulse`}>
                 {t.icon}
               </div>
               <h3 className="font-bold text-xl mb-4 text-gray-900 dark:text-white">{t.title}</h3>
-              <ul className="space-y-2">
+              <ul className="space-y-2 mb-6">
                 {t.points.map((p) => (
                   <li key={p} className="flex items-center text-sm text-gray-600 dark:text-gray-300">
-                    <span className="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
+                    <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 animate-bounce"></span>
                     {p}
                   </li>
                 ))}
               </ul>
+              
+              {/* Modules Section */}
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                <h4 className="font-semibold text-sm text-gray-700 dark:text-gray-300 mb-3">📚 Learning Modules</h4>
+                <div className="space-y-2">
+                  {t.modules.slice(0, 2).map((module, idx) => (
+                    <div key={idx} className="group">
+                      <a 
+                        href={module.video} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between p-2 rounded-lg bg-gray-50 dark:bg-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 dark:hover:from-purple-900/20 dark:hover:to-pink-900/20 transition-all duration-200"
+                      >
+                        <div className="flex-1">
+                          <p className="text-xs font-medium text-gray-800 dark:text-gray-200 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                            {module.name}
+                          </p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">
+                            {module.description}
+                          </p>
+                        </div>
+                        <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center ml-2 group-hover:scale-110 transition-transform">
+                          <span className="text-white text-xs">▶</span>
+                        </div>
+                      </a>
+                    </div>
+                  ))}
+                  {t.modules.length > 2 && (
+                    <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+                      +{t.modules.length - 2} more modules
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
           ))}
         </div>

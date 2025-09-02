@@ -28,18 +28,52 @@ export default function StudentDashboard() {
         <div className="grid md:grid-cols-4 gap-6 mb-16">
           {[
             { label: "Total Score", value: "1,250", icon: "⭐", color: "from-yellow-400 to-orange-500" },
+            { label: "Coins Earned", value: "2,850", icon: "🪙", color: "from-yellow-500 to-yellow-600" },
             { label: "Quizzes Taken", value: "12", icon: "📊", color: "from-blue-400 to-blue-600" },
-            { label: "Certificates", value: "3", icon: "🏅", color: "from-green-400 to-green-600" },
             { label: "Rank", value: "#47", icon: "🎖️", color: "from-purple-400 to-purple-600" },
           ].map((stat, index) => (
-            <div key={stat.label} className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 card-hover" style={{ animationDelay: `${index * 0.1}s` }}>
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${stat.color} flex items-center justify-center text-xl mb-4`}>
+            <div key={stat.label} className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 card-hover transform hover:scale-105 transition-all duration-300" style={{ animationDelay: `${index * 0.1}s` }}>
+              <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${stat.color} flex items-center justify-center text-xl mb-4 animate-pulse`}>
                 {stat.icon}
               </div>
               <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">{stat.value}</div>
               <div className="text-sm text-gray-600 dark:text-gray-300">{stat.label}</div>
             </div>
           ))}
+        </div>
+
+        {/* Activity Heatmap */}
+        <div className="mb-16">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-2xl border border-gray-200 dark:border-gray-700">
+            <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white text-center">📊 Learning Activity Heatmap</h2>
+            <div className="grid grid-cols-7 gap-2 mb-4">
+              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => (
+                <div key={day} className="text-center text-sm font-medium text-gray-600 dark:text-gray-300">{day}</div>
+              ))}
+            </div>
+            <div className="grid grid-cols-7 gap-2">
+              {Array.from({ length: 28 }, (_, i) => {
+                const intensity = Math.floor(Math.random() * 5);
+                const colors = ['bg-gray-100 dark:bg-gray-700', 'bg-green-200 dark:bg-green-800', 'bg-green-300 dark:bg-green-700', 'bg-green-400 dark:bg-green-600', 'bg-green-500 dark:bg-green-500'];
+                return (
+                  <div 
+                    key={i} 
+                    className={`w-8 h-8 rounded ${colors[intensity]} hover:scale-110 transition-transform duration-200 cursor-pointer`}
+                    title={`${intensity} activities`}
+                  />
+                );
+              })}
+            </div>
+            <div className="flex justify-center mt-4 space-x-4 text-sm text-gray-600 dark:text-gray-300">
+              <span>Less</span>
+              <div className="flex space-x-1">
+                {[0,1,2,3,4].map(i => (
+                  <div key={i} className={`w-3 h-3 rounded ${['bg-gray-100 dark:bg-gray-700', 'bg-green-200 dark:bg-green-800', 'bg-green-300 dark:bg-green-700', 'bg-green-400 dark:bg-green-600', 'bg-green-500 dark:bg-green-500'][i]}`} />
+                ))}
+              </div>
+              <span>More</span>
+            </div>
+          </div>
         </div>
 
         {/* Features Grid */}

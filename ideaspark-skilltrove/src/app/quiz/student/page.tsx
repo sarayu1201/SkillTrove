@@ -9,11 +9,58 @@ type Question = {
   answerIndex: number;
 };
 
-const sampleQuestions: Question[] = Array.from({ length: 10 }).map((_, i) => ({
-  q: `Sample question ${i + 1}?`,
-  options: ["A", "B", "C", "D"],
-  answerIndex: i % 4,
-}));
+const sampleQuestions: Question[] = [
+  {
+    q: "If a train travels 120 km in 2 hours, what is its speed?",
+    options: ["60 km/h", "50 km/h", "70 km/h", "80 km/h"],
+    answerIndex: 0,
+  },
+  {
+    q: "What is 25% of 200?",
+    options: ["40", "50", "60", "75"],
+    answerIndex: 1,
+  },
+  {
+    q: "Complete the series: 2, 4, 8, 16, ?",
+    options: ["24", "32", "20", "28"],
+    answerIndex: 1,
+  },
+  {
+    q: "If 5 workers can complete a job in 8 days, how many days will 10 workers take?",
+    options: ["4 days", "6 days", "8 days", "10 days"],
+    answerIndex: 0,
+  },
+  {
+    q: "What is the synonym of 'BENEVOLENT'?",
+    options: ["Cruel", "Kind", "Angry", "Sad"],
+    answerIndex: 1,
+  },
+  {
+    q: "If A is to B as C is to D, and A=2, B=4, C=6, then D=?",
+    options: ["8", "10", "12", "14"],
+    answerIndex: 2,
+  },
+  {
+    q: "What is the next number in the sequence: 1, 4, 9, 16, ?",
+    options: ["20", "24", "25", "30"],
+    answerIndex: 2,
+  },
+  {
+    q: "If a shirt costs $40 and is on sale for 20% off, what is the sale price?",
+    options: ["$30", "$32", "$35", "$38"],
+    answerIndex: 1,
+  },
+  {
+    q: "What is the antonym of 'TRANSPARENT'?",
+    options: ["Clear", "Opaque", "Bright", "Shiny"],
+    answerIndex: 1,
+  },
+  {
+    q: "If 3x + 7 = 22, what is the value of x?",
+    options: ["3", "4", "5", "6"],
+    answerIndex: 2,
+  },
+];
 
 export default function StudentQuizPage() {
   const router = useRouter();

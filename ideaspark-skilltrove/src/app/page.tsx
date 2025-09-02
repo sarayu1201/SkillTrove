@@ -2,29 +2,33 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="bg-gray-50 dark:bg-gray-900">
+    <div className="bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 dark:from-gray-900 dark:via-purple-900 dark:to-blue-900">
       {/* Hero Section */}
-      <section className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-        <div className="max-w-6xl mx-auto px-4 py-16 text-center">
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 opacity-10"></div>
+        <div className="relative max-w-6xl mx-auto px-4 py-20 text-center">
           <div className="animate-fadeInUp">
-            <h1 className="text-5xl sm:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
+            <div className="inline-block mb-6">
+              <span className="text-6xl animate-bounce">🚀</span>
+            </div>
+            <h1 className="text-6xl sm:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent">
               SkillTrove
             </h1>
-            <p className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="text-xl sm:text-2xl mb-10 max-w-3xl mx-auto text-gray-700 dark:text-gray-300 leading-relaxed">
               Learn, reskill, compete, and connect. One platform for students and professionals.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-6">
               <Link 
                 href="/login" 
-                className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200"
+                className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
-                Get Started
+                🎯 Get Started
               </Link>
               <Link 
                 href="/skillquest" 
-                className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                className="px-8 py-4 border-2 border-purple-500 text-purple-600 dark:text-purple-400 rounded-xl font-semibold hover:bg-purple-500 hover:text-white transition-all duration-300 transform hover:scale-105"
               >
-                Explore Learning
+                📚 Explore Learning
               </Link>
             </div>
           </div>

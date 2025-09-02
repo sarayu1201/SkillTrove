@@ -9,11 +9,58 @@ type Question = {
   answerIndex: number;
 };
 
-const sampleQuestions: Question[] = Array.from({ length: 10 }).map((_, i) => ({
-  q: `Professional assessment ${i + 1}: Choose the correct option`,
-  options: ["Option A", "Option B", "Option C", "Option D"],
-  answerIndex: (i + 1) % 4,
-}));
+const sampleQuestions: Question[] = [
+  {
+    q: "What is the primary purpose of a load balancer in system design?",
+    options: ["Data encryption", "Request distribution", "Database optimization", "User authentication"],
+    answerIndex: 1,
+  },
+  {
+    q: "Which cloud service model provides the most control over infrastructure?",
+    options: ["SaaS", "PaaS", "IaaS", "FaaS"],
+    answerIndex: 2,
+  },
+  {
+    q: "What is the main advantage of microservices architecture?",
+    options: ["Lower cost", "Better scalability", "Simpler deployment", "Faster development"],
+    answerIndex: 1,
+  },
+  {
+    q: "Which leadership style focuses on empowering team members?",
+    options: ["Autocratic", "Democratic", "Laissez-faire", "Transformational"],
+    answerIndex: 3,
+  },
+  {
+    q: "What does CAP theorem stand for in distributed systems?",
+    options: ["Consistency, Availability, Partition tolerance", "Control, Access, Performance", "Cost, Accuracy, Performance", "Capacity, Availability, Performance"],
+    answerIndex: 0,
+  },
+  {
+    q: "Which AWS service is used for serverless computing?",
+    options: ["EC2", "Lambda", "S3", "RDS"],
+    answerIndex: 1,
+  },
+  {
+    q: "What is the primary goal of DevOps?",
+    options: ["Reduce costs", "Improve collaboration", "Increase security", "Simplify architecture"],
+    answerIndex: 1,
+  },
+  {
+    q: "Which database type is best for handling complex relationships?",
+    options: ["NoSQL", "Relational", "Key-value", "Document"],
+    answerIndex: 1,
+  },
+  {
+    q: "What is the main benefit of containerization?",
+    options: ["Better performance", "Consistent environments", "Lower memory usage", "Easier debugging"],
+    answerIndex: 1,
+  },
+  {
+    q: "Which leadership principle emphasizes leading by example?",
+    options: ["Vision setting", "Servant leadership", "Authentic leadership", "Transactional leadership"],
+    answerIndex: 2,
+  },
+];
 
 export default function ProfessionalQuizPage() {
   const router = useRouter();
