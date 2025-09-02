@@ -5,49 +5,53 @@ import { useState } from "react";
 const topics = [
   {
     title: "Aptitude",
-    points: ["Percentages", "Ratios & Proportions", "Time & Work", "Profit & Loss"],
+    points: ["🎯 Number Systems & Operations", "📊 Percentages & Ratios", "📈 Profit & Loss Calculations", "⏰ Time & Work Problems", "📏 Geometry & Mensuration", "🔢 Algebra & Equations"],
     icon: "🧮",
     color: "from-blue-500 to-cyan-500",
+    description: "Master quantitative reasoning and mathematical problem-solving skills",
     modules: [
-      { name: "Number Systems", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master number theory fundamentals" },
-      { name: "Percentage & Profit Loss", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Learn business mathematics" },
-      { name: "Time & Work", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Solve efficiency problems" },
-      { name: "Speed & Distance", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master motion problems" }
+      { name: "Number Systems", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master number theory fundamentals and mathematical operations" },
+      { name: "Percentage & Profit Loss", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Learn business mathematics and financial calculations" },
+      { name: "Time & Work", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Solve efficiency problems and work-rate calculations" },
+      { name: "Speed & Distance", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master motion problems and relative speed concepts" }
     ]
   },
   {
     title: "Verbal",
-    points: ["Reading Comprehension", "Synonyms/Antonyms", "Sentence Correction"],
+    points: ["📖 Reading Comprehension", "📚 Grammar & Vocabulary", "💬 Verbal Reasoning", "✍️ Sentence Correction", "🔤 Synonyms & Antonyms", "📝 Para Jumbles"],
     icon: "📚",
     color: "from-green-500 to-emerald-500",
+    description: "Enhance your communication and language skills",
     modules: [
-      { name: "Grammar Fundamentals", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Build strong grammar foundation" },
-      { name: "Vocabulary Building", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Expand your word power" },
-      { name: "Reading Comprehension", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master text analysis" },
-      { name: "Sentence Correction", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Perfect your writing" }
+      { name: "Grammar Fundamentals", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Build strong grammar foundation and language rules" },
+      { name: "Vocabulary Building", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Expand your word power and language proficiency" },
+      { name: "Reading Comprehension", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master text analysis and critical reading skills" },
+      { name: "Sentence Correction", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Perfect your writing and communication skills" }
     ]
   },
   {
     title: "Reasoning",
-    points: ["Puzzles", "Syllogisms", "Series", "Directions"],
+    points: ["🔍 Analytical Reasoning", "🎯 Spatial Reasoning", "🧠 Abstract Reasoning", "📊 Blood Relations", "🎲 Dice & Cubes", "🔗 Coding-Decoding"],
     icon: "🧩",
     color: "from-purple-500 to-pink-500",
+    description: "Develop critical thinking and analytical abilities",
     modules: [
-      { name: "Logical Deduction", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master logical thinking" },
-      { name: "Analytical Reasoning", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Solve complex puzzles" },
-      { name: "Pattern Recognition", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Identify sequences" },
-      { name: "Critical Thinking", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Develop analytical skills" }
+      { name: "Logical Deduction", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master logical thinking and deductive reasoning" },
+      { name: "Analytical Reasoning", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Solve complex puzzles and analytical problems" },
+      { name: "Pattern Recognition", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Identify sequences and pattern analysis" },
+      { name: "Critical Thinking", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Develop analytical skills and problem-solving approach" }
     ]
   },
   {
     title: "Coding",
-    points: ["Data Structures", "Algorithms", "Problem Solving", "Code Optimization"],
+    points: ["💻 Programming Basics", "📊 Data Structures", "🔄 Algorithms", "🎯 Problem Solving", "🧪 Debugging Skills", "⚡ Optimization"],
     icon: "💻",
     color: "from-orange-500 to-red-500",
+    description: "Learn programming fundamentals and problem-solving",
     modules: [
-      { name: "Data Structures", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master arrays, lists, trees" },
-      { name: "Algorithms", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Learn sorting and searching" },
-      { name: "Problem Solving", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Crack coding interviews" },
+      { name: "Data Structures", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Master arrays, lists, trees, and advanced data structures" },
+      { name: "Algorithms", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Learn sorting, searching, and algorithmic thinking" },
+      { name: "Problem Solving", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Crack coding interviews and competitive programming" },
       { name: "Code Optimization", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", description: "Write efficient code" }
     ]
   },

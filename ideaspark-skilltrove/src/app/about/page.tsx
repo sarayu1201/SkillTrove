@@ -1,7 +1,7 @@
 export default function AboutPage() {
   const teamMembers = [
     {
-      name: "VinayaSarayu",
+      name: "Vinaya Sarayu",
       role: "Founder & CEO",
       avatar: "👩‍💼",
       description: "Visionary leader driving SkillTrove's mission to revolutionize education and career development",
@@ -9,7 +9,7 @@ export default function AboutPage() {
       color: "from-purple-500 to-pink-500"
     },
     {
-      name: "Vedhikaeshani",
+      name: "Vedhika Eshani",
       role: "CTO & Head of Technology",
       avatar: "👩‍💻",
       description: "Technology expert leading our AI-powered learning platform and innovative solutions",
@@ -17,20 +17,20 @@ export default function AboutPage() {
       color: "from-blue-500 to-cyan-500"
     },
     {
-      name: "Mahita Sree",
-      role: "Head of Learning & Content",
-      avatar: "👩‍🎓",
-      description: "Educational specialist curating world-class learning content and curriculum design",
-      expertise: ["Curriculum Design", "Educational Psychology", "Content Strategy"],
-      color: "from-green-500 to-emerald-500"
-    },
-    {
-      name: "Praanth",
+      name: "Prasanth",
       role: "Head of Business Development",
       avatar: "👨‍💼",
       description: "Business strategist building partnerships and expanding SkillTrove's global reach",
       expertise: ["Partnerships", "Market Strategy", "Business Growth"],
       color: "from-orange-500 to-red-500"
+    },
+    {
+      name: "Mahita Sri",
+      role: "Head of Learning & Content",
+      avatar: "👩‍🎓",
+      description: "Educational specialist curating world-class learning content and curriculum design",
+      expertise: ["Curriculum Design", "Educational Psychology", "Content Strategy"],
+      color: "from-green-500 to-emerald-500"
     }
   ];
 
