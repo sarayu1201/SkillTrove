@@ -6,33 +6,81 @@ export default async function ProjectsPage() {
   const featuredProjects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
-      description: "Build a full-stack e-commerce application with React, Node.js, and MongoDB",
-      difficulty: "Intermediate",
-      duration: "4 weeks",
-      skills: ["React", "Node.js", "MongoDB", "Payment Integration"],
+      title: "Cisco Network Security Dashboard",
+      company: "Cisco",
+      description: "Build a comprehensive network security monitoring dashboard using Cisco's APIs and real-time threat detection",
+      difficulty: "Advanced",
+      duration: "6 weeks",
+      skills: ["Python", "Cisco APIs", "React", "Cybersecurity", "Real-time Data"],
       isOpen: true,
-      icon: "🛒"
+      icon: "🔒",
+      companyLogo: "🌐",
+      stipend: "$2,500"
     },
     {
       id: 2,
-      title: "AI Chatbot",
-      description: "Create an intelligent chatbot using machine learning and natural language processing",
-      difficulty: "Advanced",
-      duration: "6 weeks",
-      skills: ["Python", "TensorFlow", "NLP", "API Development"],
+      title: "Miracle Software AI Assistant",
+      company: "Miracle Software",
+      description: "Develop an AI-powered customer service assistant using natural language processing and machine learning",
+      difficulty: "Intermediate",
+      duration: "5 weeks",
+      skills: ["Python", "TensorFlow", "NLP", "API Development", "Chatbot"],
       isOpen: true,
-      icon: "🤖"
+      icon: "🤖",
+      companyLogo: "✨",
+      stipend: "$2,000"
     },
     {
       id: 3,
-      title: "Mobile App",
-      description: "Develop a cross-platform mobile application with React Native",
-      difficulty: "Beginner",
-      duration: "3 weeks",
-      skills: ["React Native", "JavaScript", "Firebase", "UI/UX"],
+      title: "Capgemini Cloud Migration Tool",
+      company: "Capgemini",
+      description: "Create a tool to automate cloud migration processes for enterprise applications",
+      difficulty: "Advanced",
+      duration: "7 weeks",
+      skills: ["AWS", "Azure", "Python", "DevOps", "Automation"],
+      isOpen: true,
+      icon: "☁️",
+      companyLogo: "🔷",
+      stipend: "$3,000"
+    },
+    {
+      id: 4,
+      title: "TCS Data Analytics Platform",
+      company: "TCS",
+      description: "Build a data analytics platform for business intelligence and reporting",
+      difficulty: "Intermediate",
+      duration: "4 weeks",
+      skills: ["Python", "SQL", "React", "Data Visualization", "Analytics"],
+      isOpen: true,
+      icon: "📊",
+      companyLogo: "🔴",
+      stipend: "$2,200"
+    },
+    {
+      id: 5,
+      title: "Infosys Blockchain Solution",
+      company: "Infosys",
+      description: "Develop a blockchain-based supply chain tracking system",
+      difficulty: "Advanced",
+      duration: "8 weeks",
+      skills: ["Blockchain", "Solidity", "React", "Web3", "Supply Chain"],
       isOpen: false,
-      icon: "📱"
+      icon: "⛓️",
+      companyLogo: "🔵",
+      stipend: "$3,500"
+    },
+    {
+      id: 6,
+      title: "Wipro IoT Smart City",
+      company: "Wipro",
+      description: "Create an IoT solution for smart city infrastructure monitoring",
+      difficulty: "Intermediate",
+      duration: "5 weeks",
+      skills: ["IoT", "Python", "React", "Real-time Monitoring", "Data Analysis"],
+      isOpen: true,
+      icon: "🏙️",
+      companyLogo: "🟢",
+      stipend: "$2,800"
     }
   ];
 
@@ -58,7 +106,13 @@ export default async function ProjectsPage() {
               className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-2xl border border-gray-200 dark:border-gray-700 transform hover:scale-105 transition-all duration-300"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="text-5xl mb-6 text-center animate-bounce">{project.icon}</div>
+              <div className="flex items-center justify-between mb-6">
+                <div className="text-5xl animate-bounce">{project.icon}</div>
+                <div className="text-right">
+                  <div className="text-2xl mb-1">{project.companyLogo}</div>
+                  <div className="text-sm font-semibold text-purple-600 dark:text-purple-400">{project.company}</div>
+                </div>
+              </div>
               <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{project.title}</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">{project.description}</p>
               
@@ -76,6 +130,10 @@ export default async function ProjectsPage() {
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Duration:</span>
                   <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{project.duration}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Stipend:</span>
+                  <span className="text-sm font-semibold text-green-600 dark:text-green-400">{project.stipend}</span>
                 </div>
               </div>
 
