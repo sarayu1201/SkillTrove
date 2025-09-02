@@ -95,28 +95,28 @@ export default function Home() {
       </section>
 
       {/* Why SkillTrove Section */}
-      <section className="py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Why Choose SkillTrove?</h2>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Why Choose SkillTrove?</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Revolutionizing education with cutting-edge technology and community-driven learning
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { icon: "🤖", title: "AI-Powered Learning", desc: "Advanced AI assistant and StoryBot for personalized education" },
               { icon: "🔒", title: "Secure Assessments", desc: "Anti-cheat technology with real-time monitoring and certificates" },
               { icon: "🌐", title: "Real-World Projects", desc: "Industry partnerships and internship opportunities" },
               { icon: "🏆", title: "Community Growth", desc: "Leaderboards, mentorship, and collaborative learning" }
             ].map((item, index) => (
-              <div key={item.title} className="text-center animate-fadeInUp" style={{ animationDelay: `${index * 0.2}s` }}>
-                <div className="w-20 h-20 mx-auto mb-6 bg-white/20 rounded-full flex items-center justify-center text-3xl backdrop-blur-sm">
+              <div key={item.title} className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center text-2xl">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                <p className="opacity-90 leading-relaxed">{item.desc}</p>
+                <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">{item.title}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -124,22 +124,22 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 to-purple-900 text-white">
+      <section className="py-16 bg-blue-600 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Transform Your Learning?</h2>
-          <p className="text-xl mb-8 opacity-90">
+          <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Learning?</h2>
+          <p className="text-lg mb-8 opacity-90">
             Join thousands of students and professionals already advancing their careers with SkillTrove
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link 
               href="/login" 
-              className="px-10 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-bold text-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-xl"
+              className="px-8 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200"
             >
               Start Learning Today
             </Link>
             <Link 
               href="/about" 
-              className="px-10 py-4 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-purple-900 transition-all duration-300 transform hover:scale-105"
+              className="px-8 py-3 border border-white text-white rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors duration-200"
             >
               Learn More
             </Link>
