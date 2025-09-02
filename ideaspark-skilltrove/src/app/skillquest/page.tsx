@@ -6,70 +6,157 @@ const topics = [
   {
     title: "Aptitude",
     points: ["Percentages", "Ratios & Proportions", "Time & Work", "Profit & Loss"],
+    icon: "🧮",
+    color: "from-blue-500 to-cyan-500"
   },
   {
     title: "Verbal",
     points: ["Reading Comprehension", "Synonyms/Antonyms", "Sentence Correction"],
+    icon: "📚",
+    color: "from-green-500 to-emerald-500"
   },
   {
     title: "Reasoning",
     points: ["Puzzles", "Syllogisms", "Series", "Directions"],
+    icon: "🧩",
+    color: "from-purple-500 to-pink-500"
   },
   {
     title: "Logic Building",
     points: ["Patterns", "Abstractions", "Problem Decomposition"],
+    icon: "⚡",
+    color: "from-orange-500 to-red-500"
   },
 ];
 
 export default function SkillQuestPage() {
   const [input, setInput] = useState("");
   const [story, setStory] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function handleAsk() {
-    const res = await fetch("/api/storybot", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ topic: input }),
-    });
-    const data = await res.json();
-    setStory(data.story || "");
+    if (!input.trim()) return;
+    setLoading(true);
+    try {
+      const res = await fetch("/api/storybot", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ topic: input }),
+      });
+      const data = await res.json();
+      setStory(data.story || "");
+    } catch (error) {
+      setStory("Sorry, I couldn't generate a story right now. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold">SkillQuest</h1>
-      <p className="opacity-90">Key highlights across aptitude, verbal, reasoning, and logic building.</p>
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {topics.map((t) => (
-          <div key={t.title} className="border rounded p-4">
-            <h3 className="font-semibold mb-2">{t.title}</h3>
-            <ul className="list-disc pl-5 space-y-1 text-sm">
-              {t.points.map((p) => (
-                <li key={p}>{p}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      <div className="border rounded p-4 space-y-3">
-        <h2 className="text-xl font-semibold">AI Assistant</h2>
-        <div className="flex gap-2">
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask a concept..."
-            className="flex-1 border rounded p-2 bg-transparent"
-          />
-          <button onClick={handleAsk} className="border rounded px-3">Ask</button>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-900 dark:to-purple-900">
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* Header */}
+        <div className="text-center mb-16 animate-fadeInUp">
+          <h1 className="text-5xl font-bold gradient-text mb-4">SkillQuest</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Master aptitude, verbal reasoning, and logic building with AI-powered learning and story-based explanations
+          </p>
         </div>
-        {story && (
-          <div className="rounded border p-3 bg-black/5 dark:bg-white/5">
-            <p className="whitespace-pre-wrap text-sm">{story}</p>
+
+        {/* Topics Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          {topics.map((t, index) => (
+            <div 
+              key={t.title} 
+              className="card-hover bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${t.color} flex items-center justify-center text-2xl mb-6`}>
+                {t.icon}
+              </div>
+              <h3 className="font-bold text-xl mb-4 text-gray-900 dark:text-white">{t.title}</h3>
+              <ul className="space-y-2">
+                {t.points.map((p) => (
+                  <li key={p} className="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                    <span className="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* AI Assistant Section */}
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 border border-gray-200 dark:border-gray-700">
+            <div className="text-center mb-8">
+              <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-3xl">
+                🤖
+              </div>
+              <h2 className="text-3xl font-bold gradient-text mb-2">AI Learning Assistant</h2>
+              <p className="text-gray-600 dark:text-gray-300">
+                Ask any concept and get a personalized story-based explanation
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <input
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Ask about any concept... (e.g., 'How do percentages work?')"
+                  className="flex-1 border-2 border-gray-200 dark:border-gray-600 rounded-xl p-4 bg-transparent focus:border-purple-500 focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 transition-all duration-300"
+                  onKeyPress={(e) => e.key === 'Enter' && handleAsk()}
+                />
+                <button 
+                  onClick={handleAsk} 
+                  disabled={loading || !input.trim()}
+                  className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                >
+                  {loading ? "Generating..." : "Ask AI"}
+                </button>
+              </div>
+
+              {story && (
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl p-6 border border-purple-200 dark:border-purple-700">
+                  <div className="flex items-center mb-4">
+                    <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-sm mr-3">
+                      📖
+                    </div>
+                    <h3 className="font-semibold text-purple-800 dark:text-purple-200">StoryBot Response</h3>
+                  </div>
+                  <p className="whitespace-pre-wrap text-gray-700 dark:text-gray-300 leading-relaxed">
+                    {story}
+                  </p>
+                </div>
+              )}
+
+              <div className="text-center">
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  ✨ Powered by advanced AI to make learning engaging and memorable
+                </p>
+              </div>
+            </div>
           </div>
-        )}
-        <p className="text-xs opacity-70">Story mode powered by StoryBot (placeholder).</p>
+        </div>
+
+        {/* Quick Tips */}
+        <div className="max-w-4xl mx-auto mt-16">
+          <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-8 text-white">
+            <h3 className="text-2xl font-bold mb-4">💡 Learning Tips</h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-semibold mb-2">Practice Regularly</h4>
+                <p className="opacity-90 text-sm">Consistent practice with different problem types builds confidence and speed.</p>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-2">Use Stories</h4>
+                <p className="opacity-90 text-sm">Ask the AI to explain concepts through stories for better retention.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
