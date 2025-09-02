@@ -10,7 +10,8 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-4xl mx-auto px-4 py-8 space-y-8">
       <h1 className="text-3xl font-bold">About SkillTrove</h1>
       <p className="opacity-90">
         SkillTrove is a learning and reskilling platform for students and professionals.
@@ -33,6 +34,7 @@ export default function AboutPage() {
           Empower every learner to master skills through practice, projects, and community.
         </p>
       </section>
+      </div>
     </div>
   );
 }
