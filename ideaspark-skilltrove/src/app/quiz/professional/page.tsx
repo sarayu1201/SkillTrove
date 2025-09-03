@@ -312,23 +312,98 @@ export default function ProfessionalQuizPage() {
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex justify-end">
-        <button onClick={enterFullscreen} className="text-xs underline">Enter fullscreen</button>
-      </div>
-      <div className="flex items-center justify-between">
-        <div className="text-sm">Time left: {timeLeft}s</div>
-        <div className="text-sm">Score: {score}</div>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-800 text-white">
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* Anti-Cheat Warning */}
+        <div className="bg-red-500/20 border border-red-500/40 rounded-2xl p-4 mb-6 backdrop-blur-sm">
+          <div className="flex items-center justify-center gap-3 text-red-200">
+            <span className="text-2xl">⚠️</span>
+            <div className="text-center">
+              <div className="font-bold text-lg">Anti-Cheat Active</div>
+              <div className="text-sm opacity-90">Right-click, copy-paste, and tab switching are disabled</div>
+            </div>
+            <span className="text-2xl">🔒</span>
+          </div>
+        </div>
 
-      <div className="border rounded p-4">
-        <h2 className="font-semibold mb-3">Q{index + 1}. {questions[index].q}</h2>
-        <div className="grid gap-2">
-          {questions[index].options.map((opt, i) => (
-            <button key={i} onClick={() => handleAnswer(i)} className="border rounded p-2 text-left hover:bg-black/5 dark:hover:bg-white/5">
-              {opt}
+        {/* Quiz Header */}
+        <div className="flex justify-between items-center mb-8">
+          <div className="text-center">
+            <h1 className="text-3xl font-bold mb-2">Professional Assessment</h1>
+            <p className="text-lg opacity-90">Test your professional skills</p>
+          </div>
+          
+          <div className="flex items-center gap-6">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-yellow-400">{timeLeft}</div>
+              <div className="text-sm opacity-80">Seconds</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-green-400">{score}</div>
+              <div className="text-sm opacity-80">Score</div>
+            </div>
+            <button 
+              onClick={enterFullscreen} 
+              className="px-4 py-2 bg-white/20 rounded-lg hover:bg-white/30 transition-all duration-300 backdrop-blur-sm"
+            >
+              🔍 Fullscreen
             </button>
-          ))}
+          </div>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="mb-8">
+          <div className="flex justify-between text-sm mb-2">
+            <span>Progress</span>
+            <span>{index + 1} / {questions.length}</span>
+          </div>
+          <div className="w-full bg-white/20 rounded-full h-3">
+            <div 
+              className="bg-gradient-to-r from-blue-400 to-indigo-500 h-3 rounded-full transition-all duration-500"
+              style={{ width: `${((index + 1) / questions.length) * 100}%` }}
+            ></div>
+          </div>
+        </div>
+
+        {/* Question Card */}
+        <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl mb-8">
+          <div className="text-center mb-8">
+            <div className="inline-block bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full px-6 py-2 text-sm font-semibold mb-4">
+              Question {index + 1} of {questions.length}
+            </div>
+            <h2 className="text-2xl font-bold leading-relaxed">
+              {questions[index].q}
+            </h2>
+          </div>
+
+          <div className="grid gap-4">
+            {questions[index].options.map((opt, i) => (
+              <button 
+                key={i} 
+                onClick={() => handleAnswer(i)} 
+                className="group p-6 bg-white/10 hover:bg-white/20 rounded-2xl border border-white/20 hover:border-white/40 transition-all duration-300 text-left backdrop-blur-sm hover:scale-105"
+              >
+                <div className="flex items-center">
+                  <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold mr-4 group-hover:scale-110 transition-transform duration-300">
+                    {String.fromCharCode(65 + i)}
+                  </div>
+                  <span className="text-lg">{opt}</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Assessment Info */}
+        <div className="text-center">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">
+            <h3 className="font-bold mb-2">📋 Assessment Rules</h3>
+            <div className="grid md:grid-cols-3 gap-4 text-sm">
+              <div>✅ Correct: +10 points</div>
+              <div>⏰ Time: 60 seconds per question</div>
+              <div>🔒 Secure: Anti-cheat enabled</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
