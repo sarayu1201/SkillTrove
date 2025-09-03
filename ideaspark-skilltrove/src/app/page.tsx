@@ -77,16 +77,16 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-blue-900 dark:to-indigo-900">
+    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-indigo-900 dark:to-purple-900">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 py-20">
           <div className="text-center relative z-10">
-            <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-full flex items-center justify-center text-6xl animate-bounce">
+            <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-6xl animate-bounce">
               🚀
             </div>
             <h1 className="text-6xl md:text-7xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
                 SkillTrove
               </span>
             </h1>
@@ -99,13 +99,13 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/login" 
-                className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-bold text-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full font-bold text-lg hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 🚀 Get Started
               </Link>
               <Link 
                 href="/about" 
-                className="px-8 py-4 border-2 border-purple-500 text-purple-600 dark:text-purple-400 rounded-full font-bold text-lg hover:bg-purple-500 hover:text-white transition-all duration-300 transform hover:scale-105"
+                className="px-8 py-4 border-2 border-blue-500 text-blue-600 dark:text-blue-400 rounded-full font-bold text-lg hover:bg-blue-500 hover:text-white transition-all duration-300 transform hover:scale-105"
               >
                 📖 Learn More
               </Link>
@@ -292,31 +292,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-3xl p-12 text-white text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your Future?</h2>
-            <p className="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
-              Join thousands of learners who have already accelerated their careers with SkillTrove. Start your journey today!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                href="/login" 
-                className="px-8 py-4 bg-white text-purple-600 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                🚀 Get Started Now
-              </Link>
-              <Link 
-                href="/about" 
-                className="px-8 py-4 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-purple-600 transition-all duration-300 transform hover:scale-105"
-              >
-                📖 Meet Our Team
-              </Link>
+              {/* CTA Section */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-12 text-white text-center">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your Future?</h2>
+              <p className="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
+                Join thousands of learners who have already accelerated their careers with SkillTrove. Start your journey today!
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link 
+                  href="/login" 
+                  className="px-8 py-4 bg-white text-blue-600 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                >
+                  🚀 Get Started Now
+                </Link>
+                <Link 
+                  href="/about" 
+                  className="px-8 py-4 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105"
+                >
+                  📖 Meet Our Team
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
     </div>
   );
 }

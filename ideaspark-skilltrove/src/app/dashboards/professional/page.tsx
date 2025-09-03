@@ -144,33 +144,89 @@ export default function ProfessionalDashboard() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Features Grid */}
-            <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-200 dark:border-gray-700">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
-                <span className="mr-3">🚀</span> Professional Actions
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {features.map((feature, index) => (
-                  <Link 
-                    key={index}
-                    href={feature.link}
-                    className="group block"
-                  >
-                    <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 transform group-hover:scale-105 transition-all duration-300 hover:shadow-lg">
-                      <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center text-3xl text-white shadow-lg`}>
-                        {feature.icon}
-                      </div>
-                      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 text-center">
-                        {feature.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300 text-center text-sm">
-                        {feature.description}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
+                    {/* Features Grid */}
+        <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+            <span className="mr-3">🚀</span> Professional Actions
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {features.map((feature, index) => (
+              <Link 
+                key={index}
+                href={feature.link}
+                className="group block"
+              >
+                <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 transform group-hover:scale-105 transition-all duration-300 hover:shadow-lg professional-card">
+                  <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center text-3xl text-white shadow-lg`}>
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 text-center">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-center text-sm">
+                    {feature.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Quick Quiz Section */}
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-3xl p-8 border border-blue-200 dark:border-blue-700">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center">
+              <span className="mr-3">🎯</span> Quick Assessment
+            </h2>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
+              Test your professional skills with our quick assessment
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-blue-200 dark:border-blue-700">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center text-3xl text-white">
+                🏗️
               </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-2">System Design</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">Test architecture skills</p>
+              <Link 
+                href="/quiz/professional"
+                className="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl text-sm font-semibold hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105"
+              >
+                Start Quiz
+              </Link>
             </div>
+            
+            <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-blue-200 dark:border-blue-700">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center text-3xl text-white">
+                ☁️
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-2">Cloud Computing</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">Test cloud expertise</p>
+              <Link 
+                href="/quiz/professional"
+                className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-xl text-sm font-semibold hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105"
+              >
+                Start Quiz
+              </Link>
+            </div>
+            
+            <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-blue-200 dark:border-blue-700">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-3xl text-white">
+                👑
+              </div>
+              <h3 className="font-bold text-gray-900 dark:text-white mb-2">Leadership</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">Test management skills</p>
+              <Link 
+                href="/quiz/professional"
+                className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl text-sm font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+              >
+                Start Quiz
+              </Link>
+            </div>
+          </div>
+        </div>
 
             {/* Recent Activities */}
             <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-200 dark:border-gray-700">
