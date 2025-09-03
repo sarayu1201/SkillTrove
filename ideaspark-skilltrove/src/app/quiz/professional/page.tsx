@@ -70,19 +70,74 @@ export default function ProfessionalQuizPage() {
   const [timeLeft, setTimeLeft] = useState(60);
   const [finished, setFinished] = useState(false);
 
-  // Secure: disable copy/paste and context menu
+  // Enhanced anti-cheat: disable copy/paste, context menu, source view, and more
   useEffect(() => {
+    // Prevent right-click context menu
     const onContext = (e: MouseEvent) => e.preventDefault();
+    
+    // Prevent copy/paste shortcuts
     const onKey = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && ["c", "v", "x", "a"].includes(e.key.toLowerCase())) {
+      if ((e.ctrlKey || e.metaKey) && ["c", "v", "x", "a", "u", "s"].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+      }
+      // Prevent F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+      if (e.key === "F12" || 
+          (e.ctrlKey && e.shiftKey && ["i", "j", "c"].includes(e.key.toLowerCase()))) {
+        e.preventDefault();
+      }
+      // Prevent Ctrl+U (view source)
+      if (e.ctrlKey && e.key.toLowerCase() === "u") {
         e.preventDefault();
       }
     };
+    
+    // Prevent drag and drop
+    const onDragStart = (e: DragEvent) => e.preventDefault();
+    
+    // Prevent text selection
+    const onSelectStart = (e: Event) => e.preventDefault();
+    
+    // Prevent print screen
+    const onKeyUp = (e: KeyboardEvent) => {
+      if (e.key === "PrintScreen") {
+        e.preventDefault();
+        return false;
+      }
+    };
+    
+    // Add all event listeners
     document.addEventListener("contextmenu", onContext);
     document.addEventListener("keydown", onKey);
+    document.addEventListener("keyup", onKeyUp);
+    document.addEventListener("dragstart", onDragStart);
+    document.addEventListener("selectstart", onSelectStart);
+    
+    // Disable text selection via CSS
+    document.body.style.userSelect = "none";
+    document.body.style.webkitUserSelect = "none";
+    document.body.style.mozUserSelect = "none";
+    document.body.style.msUserSelect = "none";
+    
+    // Disable view source
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey && e.key === "u") {
+        e.preventDefault();
+        return false;
+      }
+    });
+    
     return () => {
       document.removeEventListener("contextmenu", onContext);
       document.removeEventListener("keydown", onKey);
+      document.removeEventListener("keyup", onKeyUp);
+      document.removeEventListener("dragstart", onDragStart);
+      document.removeEventListener("selectstart", onSelectStart);
+      
+      // Re-enable text selection
+      document.body.style.userSelect = "";
+      document.body.style.webkitUserSelect = "";
+      document.body.style.mozUserSelect = "";
+      document.body.style.msUserSelect = "";
     };
   }, []);
 
@@ -96,16 +151,36 @@ export default function ProfessionalQuizPage() {
     if (timeLeft === 0) handleAnswer(-1);
   }, [timeLeft]);
 
-  // Basic anti-cheat
+  // Enhanced anti-cheat: visibility and focus penalties
   useEffect(() => {
     function onVisibility() {
       if (document.hidden) {
-        // For pros, just reduce time as penalty
-        setTimeLeft((t) => Math.max(0, t - 10));
+        // Reduce time as penalty for switching tabs
+        setTimeLeft((t) => Math.max(0, t - 15));
       }
     }
+    
+    function onBlur() {
+      // Reduce time when window loses focus
+      setTimeLeft((t) => Math.max(0, t - 10));
+    }
+    
+    function onFocus() {
+      // Show warning when returning to quiz
+      if (document.hidden) {
+        alert("⚠️ Warning: Tab switching detected! Time penalty applied.");
+      }
+    }
+    
     document.addEventListener("visibilitychange", onVisibility);
-    return () => document.removeEventListener("visibilitychange", onVisibility);
+    window.addEventListener("blur", onBlur);
+    window.addEventListener("focus", onFocus);
+    
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("blur", onBlur);
+      window.removeEventListener("focus", onFocus);
+    };
   }, []);
 
   function enterFullscreen() {
