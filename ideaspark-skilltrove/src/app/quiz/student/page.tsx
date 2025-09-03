@@ -148,16 +148,103 @@ export default function StudentQuizPage() {
 
   if (finished) {
     return (
-      <div className="space-y-4 text-center">
-        <h1 className="text-3xl font-bold">Quiz Completed</h1>
-        <p className="text-lg">Score: {score}</p>
-        <button onClick={() => router.push("/leaderboard")} className="border rounded px-4 py-2 inline-block">View Leaderboard</button>
-        <a
-          href={`/api/certificate?name=Student&score=${score}&role=Student`}
-          className="border rounded px-4 py-2 inline-block"
-        >
-          Download Certificate
-        </a>
+      <div className="min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-800 text-white">
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          {/* Results Hero Section */}
+          <div className="text-center mb-12 animate-fadeInUp">
+            <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-5xl animate-bounce">
+              🎉
+            </div>
+            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+              Quiz Completed!
+            </h1>
+            <p className="text-xl opacity-90 mb-8">Congratulations on finishing the challenge!</p>
+          </div>
+
+          {/* Score Display with Animation */}
+          <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl mb-8 animate-scaleIn">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold mb-6">Your Final Score</h2>
+              <div className="text-8xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent mb-4 animate-pulse">
+                {score}
+              </div>
+              <div className="text-2xl opacity-80 mb-6">points</div>
+              
+              {/* Performance Rating */}
+              <div className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 rounded-full px-6 py-3 text-white font-bold text-lg mb-6">
+                {score >= 80 ? "🌟 Outstanding!" : score >= 60 ? "🎯 Good Job!" : score >= 40 ? "👍 Keep Going!" : "💪 Room to Grow!"}
+              </div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <button 
+              onClick={() => router.push("/results")} 
+              className="group p-6 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl text-white font-bold text-lg hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              <div className="flex items-center justify-center gap-3">
+                <span className="text-2xl">🏆</span>
+                <span>View Detailed Results</span>
+                <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+              </div>
+            </button>
+            
+            <a
+              href={`/api/certificate?name=Student&score=${score}&role=Student`}
+              className="group p-6 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl text-white font-bold text-lg hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              <div className="flex items-center justify-center gap-3">
+                <span className="text-2xl">📜</span>
+                <span>Download Certificate</span>
+                <span className="group-hover:scale-110 transition-transform duration-300">⬇️</span>
+              </div>
+            </a>
+          </div>
+
+          {/* Additional Actions */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <button 
+              onClick={() => router.push("/leaderboard")} 
+              className="group p-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl text-white font-bold text-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              <div className="flex items-center justify-center gap-3">
+                <span className="text-2xl">📊</span>
+                <span>View Leaderboard</span>
+                <span className="group-hover:rotate-12 transition-transform duration-300">🏅</span>
+              </div>
+            </button>
+            
+            <button 
+              onClick={() => window.location.reload()} 
+              className="group p-6 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl text-white font-bold text-lg hover:from-orange-600 hover:to-red-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              <div className="flex items-center justify-center gap-3">
+                <span className="text-2xl">🔄</span>
+                <span>Try Again</span>
+                <span className="group-hover:rotate-180 transition-transform duration-300">⚡</span>
+              </div>
+            </button>
+          </div>
+
+          {/* Celebration Animation */}
+          <div className="fixed inset-0 pointer-events-none">
+            {Array.from({ length: 20 }).map((_, i) => (
+              <div
+                key={i}
+                className="absolute animate-bounce"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 2}s`,
+                  animationDuration: `${2 + Math.random() * 2}s`
+                }}
+              >
+                {['🎉', '🎊', '🌟', '✨', '🎈'][Math.floor(Math.random() * 5)]}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
