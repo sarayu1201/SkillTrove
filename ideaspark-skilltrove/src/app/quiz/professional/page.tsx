@@ -315,63 +315,74 @@ export default function ProfessionalQuizPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-800 text-white">
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Anti-Cheat Warning */}
-        <div className="bg-red-500/20 border border-red-500/40 rounded-2xl p-4 mb-6 backdrop-blur-sm">
-          <div className="flex items-center justify-center gap-3 text-red-200">
-            <span className="text-2xl">⚠️</span>
+        <div className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-400/50 rounded-2xl p-4 mb-6 backdrop-blur-sm shadow-lg">
+          <div className="flex items-center justify-center gap-3 text-red-100">
+            <span className="text-2xl animate-pulse">⚠️</span>
             <div className="text-center">
-              <div className="font-bold text-lg">Anti-Cheat Active</div>
-              <div className="text-sm opacity-90">Right-click, copy-paste, and tab switching are disabled</div>
+              <div className="font-bold text-lg text-red-100">Anti-Cheat Active</div>
+              <div className="text-sm opacity-90 text-orange-100">Right-click, copy-paste, and tab switching are disabled</div>
             </div>
-            <span className="text-2xl">🔒</span>
+            <span className="text-2xl animate-bounce">🔒</span>
           </div>
         </div>
 
         {/* Quiz Header */}
-        <div className="flex justify-between items-center mb-8">
-          <div className="text-center">
-            <h1 className="text-3xl font-bold mb-2">Professional Assessment</h1>
-            <p className="text-lg opacity-90">Test your professional skills</p>
-          </div>
-          
-          <div className="flex items-center gap-6">
+        <div className="bg-gradient-to-r from-blue-500/20 to-indigo-500/20 rounded-3xl p-6 mb-8 border border-blue-400/30 backdrop-blur-sm shadow-xl">
+          <div className="flex justify-between items-center">
             <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-400">{timeLeft}</div>
-              <div className="text-sm opacity-80">Seconds</div>
+              <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-300 to-indigo-300 bg-clip-text text-transparent">
+                Professional Assessment
+              </h1>
+              <p className="text-lg text-blue-100">Test your professional skills</p>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">{score}</div>
-              <div className="text-sm opacity-80">Score</div>
+            
+            <div className="flex items-center gap-6">
+              <div className="text-center bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-2xl p-4 border border-yellow-400/30">
+                <div className="text-3xl font-bold text-yellow-300">{timeLeft}</div>
+                <div className="text-sm text-yellow-200 font-semibold">Seconds</div>
+              </div>
+              <div className="text-center bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-2xl p-4 border border-green-400/30">
+                <div className="text-3xl font-bold text-green-300">{score}</div>
+                <div className="text-sm text-green-200 font-semibold">Score</div>
+              </div>
+              <button 
+                onClick={enterFullscreen} 
+                className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold"
+              >
+                🔍 Fullscreen
+              </button>
             </div>
-            <button 
-              onClick={enterFullscreen} 
-              className="px-4 py-2 bg-white/20 rounded-lg hover:bg-white/30 transition-all duration-300 backdrop-blur-sm"
-            >
-              🔍 Fullscreen
-            </button>
           </div>
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-8">
-          <div className="flex justify-between text-sm mb-2">
-            <span>Progress</span>
-            <span>{index + 1} / {questions.length}</span>
+        <div className="mb-8 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 rounded-2xl p-6 border border-blue-400/20">
+          <div className="flex justify-between text-sm mb-3">
+            <span className="text-blue-200 font-semibold">Progress</span>
+            <span className="text-indigo-200 font-semibold">{index + 1} / {questions.length}</span>
           </div>
-          <div className="w-full bg-white/20 rounded-full h-3">
+          <div className="w-full bg-white/10 rounded-full h-4 overflow-hidden">
             <div 
-              className="bg-gradient-to-r from-blue-400 to-indigo-500 h-3 rounded-full transition-all duration-500"
+              className="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 h-4 rounded-full transition-all duration-1000 ease-out relative"
               style={{ width: `${((index + 1) / questions.length) * 100}%` }}
-            ></div>
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-pulse"></div>
+            </div>
+          </div>
+          <div className="text-center mt-3">
+            <span className="text-blue-100 text-sm">
+              {Math.round(((index + 1) / questions.length) * 100)}% Complete
+            </span>
           </div>
         </div>
 
         {/* Question Card */}
-        <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl mb-8">
+        <div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-blue-400/30 shadow-2xl mb-8">
           <div className="text-center mb-8">
-            <div className="inline-block bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full px-6 py-2 text-sm font-semibold mb-4">
+            <div className="inline-block bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full px-8 py-3 text-sm font-bold mb-6 text-white shadow-lg">
               Question {index + 1} of {questions.length}
             </div>
-            <h2 className="text-2xl font-bold leading-relaxed">
+            <h2 className="text-3xl font-bold leading-relaxed text-blue-50 mb-4">
               {questions[index].q}
             </h2>
           </div>
@@ -381,13 +392,13 @@ export default function ProfessionalQuizPage() {
               <button 
                 key={i} 
                 onClick={() => handleAnswer(i)} 
-                className="group p-6 bg-white/10 hover:bg-white/20 rounded-2xl border border-white/20 hover:border-white/40 transition-all duration-300 text-left backdrop-blur-sm hover:scale-105"
+                className="group p-6 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 hover:from-blue-500/30 hover:to-indigo-500/30 rounded-2xl border border-blue-400/30 hover:border-blue-300/50 transition-all duration-300 text-left backdrop-blur-sm hover:scale-105 shadow-lg"
               >
                 <div className="flex items-center">
-                  <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold mr-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-10 h-10 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold mr-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                     {String.fromCharCode(65 + i)}
                   </div>
-                  <span className="text-lg">{opt}</span>
+                  <span className="text-lg text-blue-50 font-medium">{opt}</span>
                 </div>
               </button>
             ))}
@@ -396,14 +407,38 @@ export default function ProfessionalQuizPage() {
 
         {/* Assessment Info */}
         <div className="text-center">
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">
-            <h3 className="font-bold mb-2">📋 Assessment Rules</h3>
-            <div className="grid md:grid-cols-3 gap-4 text-sm">
-              <div>✅ Correct: +10 points</div>
-              <div>⏰ Time: 60 seconds per question</div>
-              <div>🔒 Secure: Anti-cheat enabled</div>
+          <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-lg rounded-2xl p-8 border border-green-400/30 shadow-xl">
+            <h3 className="font-bold mb-4 text-2xl text-green-100">📋 Assessment Rules</h3>
+            <div className="grid md:grid-cols-3 gap-6 text-sm">
+              <div className="bg-gradient-to-r from-green-500/30 to-emerald-500/30 rounded-xl p-4 border border-green-400/40">
+                <div className="text-2xl mb-2">✅</div>
+                <div className="text-green-100 font-semibold">Correct: +10 points</div>
+              </div>
+              <div className="bg-gradient-to-r from-blue-500/30 to-indigo-500/30 rounded-xl p-4 border border-blue-400/40">
+                <div className="text-2xl mb-2">⏰</div>
+                <div className="text-blue-100 font-semibold">Time: 60 seconds per question</div>
+              </div>
+              <div className="bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-xl p-4 border border-purple-400/40">
+                <div className="text-2xl mb-2">🔒</div>
+                <div className="text-purple-100 font-semibold">Secure: Anti-cheat enabled</div>
+              </div>
             </div>
           </div>
+        </div>
+
+        {/* Floating Animated Elements */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          {/* Floating circles */}
+          <div className="absolute top-20 left-10 w-4 h-4 bg-blue-400/30 rounded-full animate-bounce" style={{ animationDelay: '0s', animationDuration: '3s' }}></div>
+          <div className="absolute top-40 right-20 w-6 h-6 bg-indigo-400/30 rounded-full animate-bounce" style={{ animationDelay: '1s', animationDuration: '4s' }}></div>
+          <div className="absolute bottom-40 left-20 w-3 h-3 bg-purple-400/30 rounded-full animate-bounce" style={{ animationDelay: '2s', animationDuration: '3.5s' }}></div>
+          <div className="absolute bottom-20 right-10 w-5 h-5 bg-cyan-400/30 rounded-full animate-bounce" style={{ animationDelay: '0.5s', animationDuration: '4.5s' }}></div>
+          
+          {/* Floating emojis */}
+          <div className="absolute top-32 left-1/4 text-2xl animate-pulse" style={{ animationDelay: '0.5s' }}>💼</div>
+          <div className="absolute top-1/2 right-1/3 text-2xl animate-pulse" style={{ animationDelay: '1.5s' }}>🎯</div>
+          <div className="absolute bottom-1/3 left-1/3 text-2xl animate-pulse" style={{ animationDelay: '2.5s' }}>🚀</div>
+          <div className="absolute bottom-1/2 right-1/4 text-2xl animate-pulse" style={{ animationDelay: '3s' }}>⭐</div>
         </div>
       </div>
     </div>
