@@ -15,7 +15,10 @@ export default function ThemeToggle() {
     const next = !isDark;
     setIsDark(next);
     const theme = next ? "dark" : "light";
+    
+    // Apply theme classes to both html and body
     document.documentElement.classList.toggle("dark", next);
+    document.body.className = theme;
     localStorage.setItem("theme", theme);
   }
 

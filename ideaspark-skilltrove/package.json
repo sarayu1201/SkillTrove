@@ -10,11 +10,11 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
+    "@google/generative-ai": "^0.24.1",
     "@prisma/client": "^6.15.0",
     "bcryptjs": "^3.0.2",
     "next": "15.5.2",
     "next-auth": "^4.24.11",
-    "openai": "^5.16.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "zod": "^4.1.5"
