@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 export default function ProfessionalDashboard() {
   const stats = [
@@ -115,6 +116,12 @@ export default function ProfessionalDashboard() {
                   <div className="text-xl font-bold text-gray-900 dark:text-white">5,420</div>
                 </div>
               </div>
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-2xl font-semibold hover:from-red-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
+                🚪 Logout
+              </button>
             </div>
           </div>
         </div>

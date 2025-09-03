@@ -31,6 +31,30 @@ export default function AboutPage() {
       description: "Educational specialist curating world-class learning content and curriculum design",
       expertise: ["Curriculum Design", "Educational Psychology", "Content Strategy"],
       color: "from-green-500 to-emerald-500"
+    },
+    {
+      name: "Sriram",
+      role: "Head of Operations",
+      avatar: "👨‍⚙️",
+      description: "Operations expert ensuring smooth day-to-day functioning and process optimization",
+      expertise: ["Process Management", "Quality Assurance", "Team Coordination"],
+      color: "from-indigo-500 to-blue-500"
+    },
+    {
+      name: "Vamsi",
+      role: "Head of Marketing",
+      avatar: "📢",
+      description: "Marketing strategist building brand awareness and driving user acquisition",
+      expertise: ["Digital Marketing", "Brand Strategy", "Growth Hacking"],
+      color: "from-pink-500 to-rose-500"
+    },
+    {
+      name: "Gupta",
+      role: "Head of Finance",
+      avatar: "💰",
+      description: "Financial expert managing budgets, investments, and sustainable growth planning",
+      expertise: ["Financial Planning", "Budget Management", "Investment Strategy"],
+      color: "from-emerald-500 to-teal-500"
     }
   ];
 
@@ -160,7 +184,7 @@ export default function AboutPage() {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {teamMembers.map((member, index) => (
               <div 
                 key={index}
