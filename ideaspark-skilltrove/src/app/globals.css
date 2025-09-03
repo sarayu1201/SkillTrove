@@ -77,6 +77,13 @@ body.dark {
   --leaderboard-trophy-coin-color: var(--leaderboard-trophy-coin-color-dark);
 }
 
+/* Basic body styles for theme switching */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 /* Professional Color Palette */
 .professional-primary { color: var(--primary); }
 .professional-secondary { color: var(--secondary); }

@@ -11,9 +11,12 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
     const prefersDark = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
     const theme = saved ?? (prefersDark ? "dark" : "light");
     
-    // Apply theme classes to body for CSS variable support
-    document.body.className = theme;
+    // Apply theme classes to both html and body for CSS variable support
     document.documentElement.classList.toggle("dark", theme === "dark");
+    document.body.className = theme;
+    
+    // Also set data attribute for additional CSS targeting
+    document.documentElement.setAttribute("data-theme", theme);
   }, []);
   
   if (!mounted) return <>{children}</>;

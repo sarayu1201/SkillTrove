@@ -1,6 +1,27 @@
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function HomePage() {
+  // Theme indicator effect
+  useEffect(() => {
+    const updateThemeIndicator = () => {
+      const indicator = document.querySelector('.theme-indicator');
+      if (indicator) {
+        const isDark = document.documentElement.classList.contains('dark');
+        indicator.textContent = isDark ? 'Dark' : 'Light';
+      }
+    };
+
+    // Update on mount
+    updateThemeIndicator();
+
+    // Listen for theme changes
+    const observer = new MutationObserver(updateThemeIndicator);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+    return () => observer.disconnect();
+  }, []);
+
   const features = [
     {
       icon: "🎓",
@@ -77,9 +98,16 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-indigo-900 dark:to-purple-900">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden">
+    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-indigo-900 dark:to-purple-900 transition-all duration-500">
+              {/* Theme Indicator */}
+        <div className="fixed top-4 right-4 z-50 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-sm text-white">
+          <span className="mr-2">🌙</span>
+          <span className="font-semibold">Theme: </span>
+          <span className="theme-indicator">Light</span>
+        </div>
+
+        {/* Hero Section */}
+        <section className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 py-20">
           <div className="text-center relative z-10">
             <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-6xl animate-bounce">

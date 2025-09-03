@@ -19,6 +19,10 @@ export default function ThemeToggle() {
     // Apply theme classes to both html and body
     document.documentElement.classList.toggle("dark", next);
     document.body.className = theme;
+    
+    // Set data attribute for additional CSS targeting
+    document.documentElement.setAttribute("data-theme", theme);
+    
     localStorage.setItem("theme", theme);
   }
 
