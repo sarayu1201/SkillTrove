@@ -100,62 +100,77 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-indigo-900 dark:to-purple-900 transition-all duration-500">
-              {/* Theme Indicator */}
-        <div className="fixed top-4 right-4 z-50 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-sm text-white">
-          <span className="mr-2">🌙</span>
-          <span className="font-semibold">Theme: </span>
-          <span className="theme-indicator">Light</span>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-blue-900 dark:to-indigo-900 transition-all duration-500">
+      {/* Theme Indicator */}
+      <div className="fixed top-4 right-4 z-50">
+        <div className="theme-indicator px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium text-gray-700 dark:text-gray-300 border border-white/30">
+          Loading...
         </div>
+      </div>
 
+      <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Hero Section */}
-        <section className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 py-20">
-          <div className="text-center relative z-10">
-            <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-6xl animate-bounce">
-              🚀
-            </div>
-            <h1 className="text-6xl md:text-7xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                SkillTrove
-              </span>
-            </h1>
-            <p className="text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
-              Your gateway to <span className="font-semibold text-purple-600 dark:text-purple-400">student success</span> and <span className="font-semibold text-blue-600 dark:text-blue-400">professional growth</span>
-            </p>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto">
-              Master essential skills, connect with industry professionals, and accelerate your career with our comprehensive learning platform
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                href="/login" 
-                className="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full font-bold text-lg hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                🚀 Get Started
-              </Link>
-              <Link 
-                href="/about" 
-                className="px-8 py-4 border-2 border-blue-500 text-blue-600 dark:text-blue-400 rounded-full font-bold text-lg hover:bg-blue-500 hover:text-white transition-all duration-300 transform hover:scale-105"
-              >
-                📖 Learn More
-              </Link>
-            </div>
+        <div className="text-center mb-20 animate-fadeInUp">
+          <div className="w-24 h-24 mx-auto mb-8 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-4xl animate-pulse">
+            🚀
+          </div>
+          <h1 className="text-6xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+              SkillTrove
+            </span>
+          </h1>
+          <p className="text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-8 leading-relaxed">
+            The ultimate platform for students and professionals to learn, reskill, compete, and connect. 
+            Master aptitude, reasoning, and coding with AI-powered learning experiences.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link 
+              href="/login" 
+              className="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full font-bold text-lg hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              🚀 Get Started
+            </Link>
+            <Link 
+              href="/about" 
+              className="px-8 py-4 border-2 border-blue-500 text-blue-600 dark:text-blue-400 rounded-full font-bold text-lg hover:bg-blue-500 hover:text-white transition-all duration-300 transform hover:scale-105"
+            >
+              📖 Learn More
+            </Link>
           </div>
         </div>
-        
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-16 h-16 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full opacity-20 animate-bounce"></div>
-        <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full opacity-20 animate-pulse"></div>
-      </section>
 
-      {/* Stats Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4">
+        {/* Features Grid */}
+        <div className="mb-20">
+          <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">Why Choose SkillTrove?</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <Link 
+                key={feature.title}
+                href={feature.link}
+                className="group block"
+              >
+                <div 
+                  className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-200 dark:border-gray-700 transform group-hover:scale-105 transition-all duration-300 hover:shadow-2xl"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center text-3xl text-white mb-6 group-hover:scale-110 transition-transform`}>
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{feature.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{feature.description}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Stats Section */}
+        <div className="mb-20">
+          <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">SkillTrove by the Numbers</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div 
-                key={index}
+                key={stat.label}
                 className="text-center transform hover:scale-110 transition-all duration-300"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
@@ -166,187 +181,50 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
 
-      {/* Features Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Everything You Need to Succeed
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              From foundational learning to advanced professional development, SkillTrove provides comprehensive tools for your growth
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <Link 
-                key={index}
-                href={feature.link}
-                className="group block"
-              >
-                <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-200 dark:border-gray-700 transform group-hover:scale-105 transition-all duration-300 hover:shadow-2xl">
-                  <div className={`w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center text-3xl text-white`}>
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 text-center">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-center leading-relaxed">
-                    {feature.description}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Company Partners Section */}
-      <section className="py-20 bg-white dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Trusted by Industry Leaders
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Partner with top companies and accelerate your career with real-world opportunities
-            </p>
-          </div>
-          
+        {/* Partner Companies */}
+        <div className="mb-20">
+          <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">Trusted by Industry Leaders</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
             {companies.map((company, index) => (
               <div 
-                key={index}
+                key={company.name}
                 className="text-center transform hover:scale-110 transition-all duration-300"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className={`w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${company.color} flex items-center justify-center text-3xl text-white shadow-lg`}>
                   {company.logo}
                 </div>
-                <div className="font-semibold text-gray-900 dark:text-white">{company.name}</div>
+                <h3 className="font-semibold text-gray-900 dark:text-white">{company.name}</h3>
               </div>
             ))}
           </div>
         </div>
-      </section>
 
-      {/* Learning Paths Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Choose Your Learning Path
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Whether you're a student starting your journey or a professional looking to upskill, we have the perfect path for you
+        {/* CTA Section */}
+        <div className="text-center">
+          <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-12 text-white">
+            <h2 className="text-4xl font-bold mb-6">Ready to Transform Your Skills?</h2>
+            <p className="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
+              Join thousands of learners who have already transformed their careers with SkillTrove
             </p>
-          </div>
-          
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Student Path */}
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-3xl p-8 border border-blue-200 dark:border-blue-700">
-              <div className="text-center mb-8">
-                <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-4xl text-white">
-                  🎓
-                </div>
-                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Student Learning</h3>
-                <p className="text-gray-600 dark:text-gray-300">Build strong foundations for your future career</p>
-              </div>
-              
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center">
-                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-3">✓</div>
-                  <span className="text-gray-700 dark:text-gray-300">Aptitude & Reasoning Skills</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-3">✓</div>
-                  <span className="text-gray-700 dark:text-gray-300">Verbal & Communication</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-3">✓</div>
-                  <span className="text-gray-700 dark:text-gray-300">Logic Building & Problem Solving</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-3">✓</div>
-                  <span className="text-gray-700 dark:text-gray-300">Coding Fundamentals</span>
-                </div>
-              </div>
-              
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link 
-                href="/skillquest"
-                className="block w-full text-center py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                href="/login" 
+                className="px-8 py-4 bg-white text-blue-600 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
-                Start Learning →
+                🚀 Start Learning
               </Link>
-            </div>
-
-            {/* Professional Path */}
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-3xl p-8 border border-purple-200 dark:border-purple-700">
-              <div className="text-center mb-8">
-                <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-4xl text-white">
-                  💼
-                </div>
-                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Professional Development</h3>
-                <p className="text-gray-600 dark:text-gray-300">Advance your career with industry-relevant skills</p>
-              </div>
-              
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center">
-                  <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm mr-3">✓</div>
-                  <span className="text-gray-700 dark:text-gray-300">System Design & Architecture</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm mr-3">✓</div>
-                  <span className="text-gray-700 dark:text-gray-300">Cloud Computing & DevOps</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm mr-3">✓</div>
-                  <span className="text-gray-700 dark:text-gray-300">Leadership & Management</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm mr-3">✓</div>
-                  <span className="text-gray-700 dark:text-gray-300">Industry Best Practices</span>
-                </div>
-              </div>
-              
               <Link 
-                href="/learn/professional"
-                className="block w-full text-center py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                href="/skillquest" 
+                className="px-8 py-4 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105"
               >
-                Start Learning →
+                🎯 Explore Courses
               </Link>
             </div>
           </div>
         </div>
-      </section>
-
-              {/* CTA Section */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-3xl p-12 text-white text-center">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your Future?</h2>
-              <p className="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
-                Join thousands of learners who have already accelerated their careers with SkillTrove. Start your journey today!
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link 
-                  href="/login" 
-                  className="px-8 py-4 bg-white text-blue-600 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
-                >
-                  🚀 Get Started Now
-                </Link>
-                <Link 
-                  href="/about" 
-                  className="px-8 py-4 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105"
-                >
-                  📖 Meet Our Team
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+      </div>
     </div>
   );
 }
